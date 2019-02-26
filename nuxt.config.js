@@ -13,7 +13,9 @@ module.exports = {
     ]
   },
   // CSS file injection (ie. not creating <link> element but injecting content)
-  css: [],
+  css: [
+    'animate.css'
+  ],
   // Router options
   // @link https://nuxtjs.org/api/configuration-router/
   router: {

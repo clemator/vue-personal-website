@@ -1,6 +1,7 @@
 <template>
   <div class="home-layout">
     <TopToolbar/>
+    <nuxt/>
   </div>
 </template>
 
