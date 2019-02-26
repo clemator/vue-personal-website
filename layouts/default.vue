@@ -5,13 +5,13 @@
 </template>
 
 <script>
-import TopToolbar from '../components/TopToolbar.vue'
+import TopToolbar from '~/components/TopToolbar.vue'
 
 export default {
   name: 'TheDefaultLayout',
   components: {
     TopToolbar,
-  },
+  }
 }
 </script>
 
