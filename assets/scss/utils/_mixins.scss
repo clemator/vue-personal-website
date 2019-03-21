@@ -1,0 +1,6 @@
+/// UX/UI rules regarding element that can be clicked and
+/// others than <a/> tags
+@mixin clickable() {
+  cursor: pointer;
+  &:focus { outline: 0; }
+}

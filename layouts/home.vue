@@ -1,6 +1,7 @@
 <template>
   <div class="home-layout">
     <TopToolbar/>
+    <BaseButton className="nope" label="coucou"></BaseButton>
     <nuxt/>
   </div>
 </template>

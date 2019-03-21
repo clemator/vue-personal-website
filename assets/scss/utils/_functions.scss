@@ -1,0 +1,55 @@
+/// Get image with assets path
+/// @oublic
+/// @param {String} $filename
+/// @return {URL}
+@function image($filename) {
+  @return url($ASSET_BASE_PATH + 'images/' + $filename);
+}
+/// Slightly lighten a color
+/// @access public
+/// @param {Color} $color - color to tint
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+/// Slightly darken a color
+/// @access public
+/// @param {Color} $color - color to shade
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+
+/// Calculate z-index value
+/// @access public
+/// @use {List} $z-indexes
+/// @param {String} $key1 - key to retrieve for z-index matching
+/// @param {String} $key2 - optiona, second key for deeper matching
+/// @return {Number}
+@function z-index($key1, $key2: null) {
+  $map: $z-indexes;
+  $found-index: null;
+  @if (map-has-key($map, $key1)) {
+    $found-index: index(map-keys($map), $key1);
+    @if ($key2) {
+      $map: map-get($map, $key1);
+      $found-index: index($map, $key2);
+    }
+  }
+  @return $found-index;
+}
+
+@function z($key1, $key2: null) {
+  @return z-index($key1, $key2);
+}
+
+/// Add spacing length according to given unit
+/// @public
+/// @param {Number} $num
+/// @return {Size} $em
+@function space-x($num) {
+  @return $num * $space-unit;
+}

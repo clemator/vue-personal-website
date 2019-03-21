@@ -1,0 +1,29 @@
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Material Icons'),
+       local('MaterialIcons-Regular'),
+       url('~/assets/fonts/material-icons/material-icons-regular.woff2') format('woff2'),
+       url('~/assets/fonts/material-icons/material-icons-regular.woff') format('woff');
+}
+
+// Heading
+$heading-large: 36px;
+$heading-medium: 24px;
+$heading-small: 20px;
+$heading-label: 16px;
+$heading-subnavbar: 26px;
+
+// Body
+$body-big: 18px;
+$body-regular: 16px;
+$body-small: 14px;
+
+// Caption
+$caption: 12px;
+
+// Content
+$font-family-dk: ('DK', 'Raleway', 'Sans-serif');
+$font-family-raleway: ('Raleway', 'Sans-serif');
+$font-family-material-icons: ('Material Icons');

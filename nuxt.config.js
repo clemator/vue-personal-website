@@ -42,8 +42,13 @@ module.exports = {
     // set/edit your host server variables)
     // Priority env: dotenv file < nuxt.config.env < server/cli (w/ nuxt injection)
     // @link https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/style-resources'
   ],
+  styleResources: {
+   // your settings here
+   scss: ['~/assets/scss/main.scss']
+  },
   // "nuxt.config.env" set up: please refer to the above "dotenv" comment (in short
   // each line will allow the defined server/cli variable to be potentially
   // injected into the "env" property ; the default `null` assignement will allow
