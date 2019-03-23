@@ -1,4 +1,4 @@
-// import login from ''
+import { login } from '../../../plugins/loginHelper'
 
 const state = {
   onPending: false,
@@ -10,7 +10,7 @@ const actions = {
     commit('resetError')
     commit('setPending', true)
 
-    console.log(this._vm.$http.post('authentication/login', { email, password }))
+    return login({ email, password })
   }
 }
 

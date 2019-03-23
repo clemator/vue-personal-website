@@ -1,13 +1,14 @@
-import { clone } from 'ramda'
-
 export default {
   install (Vue, {
     axios,
     config = {},
   }) {
-    const configuration = clone(config)
-    configuration.baseURL = config.baseURL || 'http://localhost:8000/api/'
+    const configuration = { ...defaultConfig, ...config}
 
-    Vue.prototype.$http = axios.create(configuration)
+    Vue.prototype.$axios = axios.create(configuration)
   }
+}
+
+const defaultConfig = {
+  baseURL: 'http://localhost:8000/api/'
 }

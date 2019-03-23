@@ -1,6 +1,7 @@
 <template>
-  <div class="default-layout">
+  <div class="user-layout">
     <TopToolbar/>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -8,7 +9,7 @@
 import TopToolbar from '../components/TopToolbar.vue'
 
 export default {
-  name: 'TheDefaultLayout',
+  name: 'UserLayout',
   components: {
     TopToolbar,
   },
@@ -16,7 +17,7 @@ export default {
 </script>
 
 <style lang="scss">
-.default-layout {
+.user-layout {
   height: 100%;
   background-color: #F0F0F0;
 }
