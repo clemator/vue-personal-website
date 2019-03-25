@@ -36,14 +36,16 @@
         <div
           v-if="error"
           class="error-text"
-        >{{ error }}
+        >
+          {{ error }}
+        </div>
       </div>
     </form>
   </div>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   name: '',
@@ -86,6 +88,7 @@ export default {
     max-height: 500px;
 
     .error-block {
+      height: 20px;
       .error-text {
         line-height: 20px;
         color: red;
