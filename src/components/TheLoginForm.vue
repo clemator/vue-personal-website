@@ -1,29 +1,26 @@
 <template>
-  <div class="the-login-form">
+  <div
+    class="the-login-form"
+  >
     <form
       class="the-login-form__form"
-      v-class="
-        {
-          'form-pending': onPending,
-          'form-error': error !== ''
-        }"
-      @submit="login(email, password)"
+      v-bind:class="{'form-pending': onPending, 'form-error': error}"
+      @submit.prevent="login(email, password)"
     >
       <input
-        name="email"
         class="base-input"
-        v-class="{'input-error': loginForm.email.error}"
         v-model="email"
         type="email"
         placeholder="Enter your email"
       >
+
       <input
-        name="password"
         class="base-input"
         v-model="password"
         type="password"
         placeholder="Enter your password"
       >
+
       <button
         type="submit"
       >
@@ -63,7 +60,7 @@ export default {
   },
   methods: {
     login(email, password) {
-      this.$store.dispatch('authentication/connexion/login', { email, password})
+      this.$store.dispatch('authentication/connexion/login', { email, password })
         .then(() => {
           console.log('CONNECTED')
         })
