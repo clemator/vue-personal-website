@@ -6,11 +6,27 @@ const state = {
 }
 
 const actions = {
-  login({ commit }, { email, password }) {
+  login({ commit, dispatch }, { email, password }) {
     commit('resetError')
     commit('setPending', true)
 
     return login({ email, password })
+      .then(() => {
+        dispatch('authentication/setAuthenticationFlag', true)
+      })
+      .catch((err) => {
+        commit('setError', err.toString())
+      })
+      .finally(() => {
+        commit('setPending', false)
+      })
+  },
+  setError({ commit }, error) {
+    commit('setError', error)
+  },
+  logout({ commit, dispatch }) {
+    commit('resetError')
+    dispatch('authentication/setAuthenticationFlag', false)
   }
 }
 
@@ -20,6 +36,9 @@ const mutations = {
   },
   resetError(state) {
     state.error = ''
+  },
+  setError(state, error) {
+    state.error = error
   }
 }
 

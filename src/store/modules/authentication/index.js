@@ -10,10 +10,17 @@ const mutations = {
   }
 }
 
+const actions = {
+  setAuthenticationFlag({ commit }, flag) {
+    commit('setConnected', flag)
+  }
+}
+
 export default {
   namespaced: true,
   state,
   mutations,
+  actions,
   modules: {
     connexion,
   }
