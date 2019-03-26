@@ -31,7 +31,9 @@
         class="error-block"
       >
         <transition
-          name=""
+          :duration="errorAnimationDuration"
+          name="custom-classes-transition"
+          enter-active-class="animated slideInDown"
         >
           <div
             v-if="error"
@@ -53,7 +55,8 @@ export default {
   data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      errorAnimationDuration: 500
     }
   },
   computed: {
@@ -66,8 +69,8 @@ export default {
     login(email, password) {
       this.resetFormError()
 
-      if (!this.email)
-        this.email
+      if (!this.email || !this.password)
+        return
 
       this.$store.dispatch('authentication/connexion/login', { email, password })
         .then(() => {
