@@ -27,6 +27,9 @@ const actions = {
   logout({ commit, dispatch }) {
     commit('resetError')
     dispatch('authentication/setAuthenticationFlag', false)
+  },
+  resetError({ commit }) {
+    commit('resetError')
   }
 }
 

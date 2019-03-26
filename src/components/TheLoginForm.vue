@@ -30,12 +30,16 @@
       <div
         class="error-block"
       >
-        <div
-          v-if="error"
-          class="error-text"
+        <transition
+          name=""
         >
-          {{ error }}
-        </div>
+          <div
+            v-if="error"
+            class="error-text"
+          >
+            {{ error }}
+          </div>
+        </transition>
       </div>
     </form>
   </div>
@@ -60,10 +64,21 @@ export default {
   },
   methods: {
     login(email, password) {
+      this.resetFormError()
+
+      if (!this.email)
+        this.email
+
       this.$store.dispatch('authentication/connexion/login', { email, password })
         .then(() => {
           console.log('CONNECTED')
         })
+        .catch((err) => {
+          this.$store.dispatch('authentication/connexion/setError', err.toString())
+        })
+    },
+    resetFormError() {
+      this.$store.dispatch('authentication/connexion/resetError')
     }
   }
 }
@@ -79,10 +94,17 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 300px;
+    padding: 20px;
     height: 100%;
-    min-height: 200px;
-    max-height: 500px;
+    max-height: 200px;
+    width: 300px;
+    background-color: #FAFAFA;
+    border-radius: 6px;
+    box-shadow: 0 4px 36px 0 rgba(197,197,197,0.7);
+
+    input {
+
+    }
 
     .error-block {
       height: 20px;
