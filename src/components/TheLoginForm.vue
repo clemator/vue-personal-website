@@ -4,44 +4,66 @@
   >
     <form
       class="the-login-form__form"
-      v-bind:class="{'form-pending': onPending, 'form-error': error}"
+      :class="{'the-login-form__form--pending': onPending, 'the-login-form__form--error': error}"
       @submit.prevent="login(email, password)"
     >
-      <input
-        class="base-input"
-        v-model="email"
-        type="email"
-        placeholder="Enter your email"
+      <div
+        class="input-container"
       >
-
-      <input
-        class="base-input"
-        v-model="password"
-        type="password"
-        placeholder="Enter your password"
-      >
-
-      <button
-        type="submit"
-      >
-        Login
-      </button>
+        <div
+          class="input-label"
+        >
+          Email
+        </div>
+        <input
+          class="base-input"
+          v-model="email"
+          type="email"
+        >
+      </div>
 
       <div
-        class="error-block"
+        class="input-container"
       >
-        <transition
-          :duration="errorAnimationDuration"
-          name="custom-classes-transition"
-          enter-active-class="animated slideInDown"
+        <div
+          class="input-label"
         >
-          <div
-            v-if="error"
-            class="error-text"
+          Password
+        </div>
+        <input
+          class="base-input"
+          v-model="password"
+          type="password"
+        >
+      </div>
+
+      <div
+        class="form-call-to-action"
+      >
+
+        <button
+          class="submit-button"
+          type="submit"
+        >
+          Login
+        </button>
+
+        <div
+          class="error-block"
+        >
+          <transition
+            :duration="errorAnimationDuration"
+            name="custom-classes-transition"
+            enter-active-class="animated fadeInDown"
           >
-            {{ error }}
-          </div>
-        </transition>
+            <div
+              v-if="error"
+              class="error-text"
+            >
+              {{ error }}
+            </div>
+          </transition>
+        </div>
       </div>
     </form>
   </div>
@@ -74,10 +96,10 @@ export default {
 
       this.$store.dispatch('authentication/connexion/login', { email, password })
         .then(() => {
-          console.log('CONNECTED')
-        })
-        .catch((err) => {
-          this.$store.dispatch('authentication/connexion/setError', err.toString())
+          if (!this.error)
+            this.$router.push({ name: 'root' })
+          else
+            console.warn('ERROR')
         })
     },
     resetFormError() {
@@ -105,16 +127,48 @@ export default {
     border-radius: 6px;
     box-shadow: 0 4px 36px 0 rgba(197,197,197,0.7);
 
-    input {
+    .input-container {
+      width: 100%;
+      .input-label {
+        font-weight: bold;
+      }
+      .base-input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 0 0 10px;
+        height: 32px;
+        border-radius: 5px;
+        border: 1px solid #DADADA;
+        outline: none;
 
+        &:focus {
+          padding: 0 0 0 9px;
+          height: 30px;
+          border: 2px solid #67CFFF;
+        }
+
+        &.input-error {
+          border: 1px solid red;
+        }
+
+        &[type="password"] {
+          font-size: 18px;
+          letter-spacing: 5px;
+        }
+      }
     }
 
-    .error-block {
-      height: 20px;
-      .error-text {
-        line-height: 20px;
-        color: red;
+    .form-call-to-action {
+      .submit-button {
+        width: 100%;
       }
+      .error-block {
+        height: 20px;
+        .error-text {
+          line-height: 20px;
+          color: red;
+        }
+      }  
     }
   }
 }

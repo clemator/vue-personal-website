@@ -1,5 +1,3 @@
-import { login } from '../../../plugins/loginHelper'
-
 const state = {
   onPending: false,
   error: ''
@@ -7,26 +5,21 @@ const state = {
 
 const actions = {
   login({ commit, dispatch }, { email, password }) {
-    commit('resetError')
     commit('setPending', true)
 
-    return login({ email, password })
+    return this._vm.$axios.post('authentication/login', { email, password })
       .then(() => {
-        dispatch('authentication/setAuthenticationFlag', true)
+        dispatch('authentication/setAuthenticationFlag', true, { root: true })
       })
-      .catch((err) => {
-        commit('setError', err.toString())
-      })
-      .finally(() => {
-        commit('setPending', false)
-      })
+      .catch((err) => commit('setError', err.toString()))
+      .finally(() => commit('setPending', false))
   },
   setError({ commit }, error) {
     commit('setError', error)
   },
   logout({ commit, dispatch }) {
     commit('resetError')
-    dispatch('authentication/setAuthenticationFlag', false)
+    dispatch('authentication/setAuthenticationFlag', false, { root: true })
   },
   resetError({ commit }) {
     commit('resetError')
