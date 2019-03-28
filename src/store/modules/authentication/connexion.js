@@ -1,3 +1,5 @@
+import client from '../../../utils/client'
+
 const state = {
   onPending: false,
   error: ''
@@ -7,7 +9,7 @@ const actions = {
   login({ commit, dispatch }, { email, password }) {
     commit('setPending', true)
 
-    return this._vm.$axios.post('authentication/login', { email, password })
+    return client.post('authentication/login', { email, password })
       .then(() => {
         dispatch('authentication/setAuthenticationFlag', true, { root: true })
       })

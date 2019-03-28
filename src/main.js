@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import axios from 'axios'
 import App from './App.vue'
 import store from './store'
-import axiosPlugin from './plugins/axiosPlugin'
 
 import UserLayout from './layouts/UserLayout'
 import AnonymousLayout from './layouts/AnonymousLayout'
@@ -19,13 +17,6 @@ const routes = [
 
 const router = new VueRouter({
   routes // short for `routes: routes`
-})
-
-Vue.use(axiosPlugin, {
-  axios,
-  config: {
-    baseURL: 'http://localhost:8000/api/'
-  }
 })
 
 new Vue({

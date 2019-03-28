@@ -97,9 +97,8 @@ export default {
       this.$store.dispatch('authentication/connexion/login', { email, password })
         .then(() => {
           if (!this.error)
-            this.$router.push({ name: 'root' })
-          else
-            console.warn('ERROR')
+            return this.$router.push({ name: 'root' })
+          console.warn('ERROR')
         })
     },
     resetFormError() {
@@ -143,7 +142,6 @@ export default {
 
         &:focus {
           padding: 0 0 0 9px;
-          height: 30px;
           border: 2px solid #67CFFF;
         }
 
