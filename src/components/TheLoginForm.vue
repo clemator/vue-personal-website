@@ -42,12 +42,14 @@
         class="form-call-to-action"
       >
 
-        <button
+        <BaseButton
           class="submit-button"
           type="submit"
+          variant="primary"
+          :status="onPending ? 'waiting' : 'default'"
         >
           Login
-        </button>
+        </BaseButton>
 
         <div
           class="error-block"
@@ -72,9 +74,13 @@
 
 <script>
 import { mapState } from 'vuex';
+import { BaseButton } from './bootstrap';
 
 export default {
   name: '',
+  components: {
+    BaseButton
+  },
   data() {
     return {
       email: '',
