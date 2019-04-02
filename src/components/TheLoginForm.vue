@@ -98,7 +98,7 @@ export default {
       this.$store.dispatch('authentication/connexion/login', { email, password })
         .then(() => {
           if (!this.error)
-            return this.$router.push({ name: 'root' });
+            return this.$router.push(this.$route.query.redirect || '/user');
           console.warn('ERROR');
         })
     },

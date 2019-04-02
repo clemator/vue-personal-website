@@ -18,6 +18,7 @@ const routes = [
     path: '/',
     component: AnonymousLayout,
     name: 'root',
+    meta: { requiresAuth: false },
     children: [
       {
         path: 'login',
@@ -26,11 +27,39 @@ const routes = [
       }
     ]
   },
-  { path: '/user', component: UserLayout, name: 'user'}
+  {
+    path: '/user',
+    component: UserLayout,
+    name: 'user',
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: 'test',
+        name: 'test'
+      }
+    ]
+  }
 ];
 
 const router = new VueRouter({
-  routes // short for `routes: routes`
+  routes
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    const isUserLogged = store.getters['authentication/isAuthenticated'];
+
+    if (!isUserLogged) {
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath }
+      });
+    }
+    else
+      next();
+  }
+  else
+    next();
 });
 
 new Vue({

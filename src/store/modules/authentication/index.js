@@ -16,11 +16,16 @@ const actions = {
   }
 };
 
+const getters = {
+  isAuthenticated: state => state.isConnected
+}
+
 export default {
   namespaced: true,
   state,
   mutations,
   actions,
+  getters,
   modules: {
     connexion,
   }
