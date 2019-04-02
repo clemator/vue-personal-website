@@ -1,4 +1,5 @@
-import client from '../../../utils/client'
+import { RepositoryFactory } from '../../../utils/repositories/RepositoryFactory'
+const AuthenticationRepository = RepositoryFactory.get('authentication')
 
 const state = {
   onPending: false,
@@ -9,7 +10,7 @@ const actions = {
   login({ commit, dispatch }, { email, password }) {
     commit('setPending', true)
 
-    return client.post('authentication/login', { email, password })
+    return AuthenticationRepository.login({ email, password })
       .then(() => {
         dispatch('authentication/setAuthenticationFlag', true, { root: true })
       })

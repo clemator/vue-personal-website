@@ -4,6 +4,6 @@ const AXIOS_CONFIG = {
   baseURL: 'http://localhost:8000/api/',
 }
 
-const axiosInstance = axios.create(AXIOS_CONFIG)
+const client = axios.create(AXIOS_CONFIG)
 
-export default axiosInstance
+export default client
