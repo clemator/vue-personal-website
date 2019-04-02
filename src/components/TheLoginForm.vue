@@ -16,6 +16,7 @@
           Email
         </div>
         <input
+          v-autofocus
           class="base-input"
           v-model="email"
           type="email"
