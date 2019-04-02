@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from 'vuex';
 
 export default {
   name: 'TopToolbar',
@@ -29,10 +29,10 @@ export default {
       isUserLoggedIn: state => state.isConnected
     }),
     isRouteLogin() {
-      return this.$route.name === 'login'
+      return this.$route.name === 'login';
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

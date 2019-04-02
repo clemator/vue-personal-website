@@ -1,21 +1,19 @@
 <template>
   <div class="anonymous-layout">
     <TopToolbar/>
-    <TheLoginForm/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import TopToolbar from '../components/TopToolbar'
-import TheLoginForm from '../components/TheLoginForm'
+import TopToolbar from '../components/TopToolbar';
 
 export default {
   name: 'AnonymousLayout',
   components: {
     TopToolbar,
-    TheLoginForm
   }
-}
+};
 </script>
 
 <style lang="scss">

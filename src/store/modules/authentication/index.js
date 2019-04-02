@@ -1,20 +1,20 @@
-import connexion from './connexion'
+import connexion from './connexion';
 
 const state = {
   isConnected: false,
-}
+};
 
 const mutations = {
   setConnected(state, flag) {
-    state.isConnected = flag
+    state.isConnected = flag;
   }
-}
+};
 
 const actions = {
   setAuthenticationFlag({ commit }, flag) {
-    commit('setConnected', flag)
+    commit('setConnected', flag);
   }
-}
+};
 
 export default {
   namespaced: true,
@@ -24,4 +24,4 @@ export default {
   modules: {
     connexion,
   }
-}
+};

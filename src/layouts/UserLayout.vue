@@ -6,14 +6,14 @@
 </template>
 
 <script>
-import TopToolbar from '../components/TopToolbar.vue'
+import TopToolbar from '../components/TopToolbar.vue';
 
 export default {
   name: 'UserLayout',
   components: {
     TopToolbar,
   },
-}
+};
 </script>
 
 <style lang="scss">

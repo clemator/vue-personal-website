@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from 'vuex';
 
 export default {
   name: '',
@@ -80,7 +80,7 @@ export default {
       email: '',
       password: '',
       errorAnimationDuration: 500
-    }
+    };
   },
   computed: {
     ...mapState('authentication/connexion', {
@@ -90,20 +90,20 @@ export default {
   },
   methods: {
     login(email, password) {
-      this.resetFormError()
+      this.resetFormError();
 
       if (!this.email || !this.password)
-        return
+        return;
 
       this.$store.dispatch('authentication/connexion/login', { email, password })
         .then(() => {
           if (!this.error)
-            return this.$router.push({ name: 'root' })
-          console.warn('ERROR')
+            return this.$router.push({ name: 'root' });
+          console.warn('ERROR');
         })
     },
     resetFormError() {
-      this.$store.dispatch('authentication/connexion/resetError')
+      this.$store.dispatch('authentication/connexion/resetError');
     }
   }
 }
