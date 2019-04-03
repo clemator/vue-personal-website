@@ -10,22 +10,31 @@
     class="base-button"
     v-on="onEvent()"
   >
-    <base-spinner
-      v-if="status === 'waiting'"
-      size="15px"
-      color="#FAFAFA"
-    />
-    <slot v-else />
+    <base-ripple
+      class="base-button__inner"
+      :disabled="status === 'disabled'"
+      fluid
+    >
+      <base-spinner
+        v-if="status === 'waiting'"
+        size="14px"
+        color="#FAFAFA"
+        margin="2px 2px"
+      />
+      <slot v-else />
+    </base-ripple>
   </button>
 </template>
 
 <script>
 import BaseSpinner from './../effect/BaseSpinner';
+import BaseRipple from './../effect/BaseRipple';
 
 export default {
   name: 'BaseButton',
   components: {
-    BaseSpinner
+    BaseSpinner,
+    BaseRipple
   },
   props: {
     status: {
@@ -60,5 +69,39 @@ export default {
 </script>
 
 <style lang="scss">
+.base-button {
+  display: inline-flex;
 
+  padding: 0;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  color: #FFF;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+  min-height: 25px;
+  outline: none;
+  cursor: pointer;
+
+  &__inner {
+    padding: 5px 0;
+  }
+
+  &--primary {
+    background-color: #67CACE;
+
+    &:hover, &:focus {
+      background-color: #67CACF;
+    }
+
+    &--disabled {
+      opacity: 0.6;
+    }
+  }
+
+  &--disabled,
+  &--waiting {
+    cursor: initial;
+  }
+}
 </style>

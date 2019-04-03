@@ -5,7 +5,7 @@
  *
  *  @props {string} size (css format)
  *  @props {string} color
- *  @props {string} margin
+ *  @props {string} margin (css format)
  *  @props {string} radius
  *
  *  @link https://github.com/greyby/vue-spinner
@@ -26,3 +26,10 @@ export default {
     class="base-spinner"
   />
 </template>
+
+<style lang="scss">
+.base-spinner {
+  display: flex;
+  justify-content: center;
+}
+</style>
