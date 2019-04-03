@@ -11,6 +11,7 @@
     v-on="onEvent()"
   >
     <base-ripple
+      :color="'#000'"
       class="base-button__inner"
       :disabled="status === 'disabled'"
       fluid
@@ -88,10 +89,14 @@ export default {
   }
 
   &--primary {
-    background-color: #67CACE;
+    background-color: rgba(76, 175, 80, 1);
 
     &:hover, &:focus {
-      background-color: #67CACF;
+      background-color: rgba(76, 175, 80, 0.85);
+    }
+
+    .rippleJS .ripple {
+      color: rgb(46, 55, 50);
     }
 
     &--disabled {

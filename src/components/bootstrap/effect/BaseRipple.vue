@@ -3,7 +3,7 @@
     :class="{
       'base-ripple--fluid': fluid,
       'base-ripple--spread': spread,
-      'base-ripple--disabled': disabled,
+      'base-ripple--disabled': disabled
     }"
     class="base-ripple"
   >
@@ -42,6 +42,10 @@ export default {
     disabled: {
       type: Boolean,
       default: false,
+    },
+    color: {
+      type: String,
+      required: false
     }
   }
 }

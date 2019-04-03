@@ -1,5 +1,7 @@
 import UserLayout from './layouts/UserLayout';
 import AnonymousLayout from './layouts/AnonymousLayout';
+import NotFoundLayout from './layouts/NotFoundLayout';
+
 import TheLoginForm from './components/TheLoginForm';
 
 import store from './store';
@@ -26,7 +28,28 @@ export const routes = [
     children: [
       {
         path: 'test',
-        name: 'test'
+        name: 'test',
+        children: [
+          {
+            path: '*',
+            redirect: { name: 'not-found' }
+          }
+        ]
+      },
+      {
+        path: '*',
+        redirect: { name: 'not-found' }
+      }
+    ]
+  },
+  {
+    path: '/not-found',
+    name: 'not-found',
+    component: NotFoundLayout,
+    children: [
+      {
+        path: '*',
+        redirect: { name: 'not-found' }
       }
     ]
   }
