@@ -12,17 +12,17 @@ const actions = {
 
     return AuthenticationRepository.login({ email, password })
       .then(() => {
-        dispatch('authentication/setAuthenticationFlag', true, { root: true });
+        dispatch('authentication/create', { email }, { root: true });
       })
       .catch((err) => commit('setError', err.toString()))
-      .finally(() => commit('setPending', false))
+      .finally(() => commit('setPending', false));
   },
   setError({ commit }, error) {
     commit('setError', error);
   },
   logout({ commit, dispatch }) {
     commit('resetError');
-    dispatch('authentication/setAuthenticationFlag', false, { root: true });
+    dispatch('authentication/destroy', undefined, { root: true });
   },
   resetError({ commit }) {
     commit('resetError');

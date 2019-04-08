@@ -105,7 +105,6 @@ export default {
         .then(() => {
           if (!this.error)
             return this.$router.push(this.$route.query.redirect || '/user');
-          console.warn('ERROR');
         })
     },
     resetFormError() {
@@ -174,6 +173,14 @@ export default {
           color: red;
         }
       }  
+    }
+
+    &--error {
+      .input-container {
+        .base-input {
+          border-color: red;
+        }
+      }
     }
   }
 }
