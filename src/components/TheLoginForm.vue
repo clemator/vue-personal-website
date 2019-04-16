@@ -126,7 +126,7 @@ export default {
     justify-content: space-between;
     padding: 20px;
     height: 100%;
-    max-height: 200px;
+    max-height: 250px;
     width: 300px;
     background-color: #FAFAFA;
     border-radius: 6px;
@@ -169,6 +169,7 @@ export default {
       .error-block {
         height: 20px;
         .error-text {
+          font-size: 12px;
           line-height: 20px;
           color: red;
         }

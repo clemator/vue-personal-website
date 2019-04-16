@@ -26,7 +26,7 @@ export default {
   name: 'TopToolbar',
   computed: {
     ...mapState('authentication', {
-      isUserLoggedIn: state => state.isConnected
+      isUserLoggedIn: state => state.isAuthenticated
     }),
     isRouteLogin() {
       return this.$route.name === 'login';
