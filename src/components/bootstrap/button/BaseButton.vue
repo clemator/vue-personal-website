@@ -62,7 +62,7 @@ export default {
       }
     },
     onClick() {
-      if (!this.status === 'disabled')
+      if (this.status !== 'disabled')
         return this.$emit('click')
     }
   }

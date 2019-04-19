@@ -1,8 +1,8 @@
 import UserLayout from './layouts/UserLayout';
 import AnonymousLayout from './layouts/AnonymousLayout';
 import NotFoundLayout from './layouts/NotFoundLayout';
+import ShapeItLayout from './layouts/ShapeItLayout';
 
-import TheLoginForm from './components/TheLoginForm';
 import TheLoginForm from './components/TheLoginForm';
 
 import store from './store';
@@ -40,11 +40,7 @@ export const routes = [
     path: '/shape-it',
     component: ShapeItLayout,
     name: 'shape-it',
-    meta: { requiresAuth: false },
-    children: [
-      path: 'surface',
-      component: 
-    ]
+    meta: { requiresAuth: false }
   },
   {
     path: '/not-found',
