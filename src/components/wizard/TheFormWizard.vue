@@ -10,17 +10,16 @@
         v-if="!isSurfaceSelected"
         :callback="selectSurfaceType"
       ></surface-selection>
-      <div
+      <surface-composition
         key="paint"
         v-if="isSurfaceSelected"
       >
-        {{ currentSurface }}
         <div
-          @click="returnToFirstStep()"
+          @click="resetSurfaceChoice()"
         >
           RETURN
         </div>
-      </div>
+      </surface-composition>
     </transition>
   </div>
 </template>
@@ -28,11 +27,13 @@
 <script>
 import { mapGetters } from 'vuex';
 import SurfaceSelection from './../form/SurfaceSelection';
+import SurfaceComposition from './../form/SurfaceComposition';
 
 export default {
   name: 'TheFormWizard',
   components: {
-    SurfaceSelection
+    SurfaceSelection,
+    SurfaceComposition
   },
   data() {
     return {
@@ -42,7 +43,6 @@ export default {
   },
   computed: {
     ...mapGetters('shapeIt/wizard', [
-      'currentSurface',
       'isSurfaceSelected'
     ])
   },
@@ -50,15 +50,15 @@ export default {
     selectSurfaceType(type) {
       this.$store.dispatch('shapeIt/wizard/changeSurfaceType', type);
     },
-    returnToFirstStep() {
+    resetSurfaceChoice() {
       this.$store.dispatch('shapeIt/wizard/resetSurfaceType');
 
     }
   },
   watch: {
-  'currentSurface' () {
-    this.enterTransitionName = (!this.isSurfaceSelected) ? 'animated fadeInLeft' : 'animated fadeInRight';
-    this.leaveTransitionName = (!this.isSurfaceSelected) ? 'animated fadeOutRight' : 'animated fadeOutLeft';
+  'isSurfaceSelected' (isIt) {
+    this.enterTransitionName = (!isIt) ? 'animated fadeInLeft' : 'animated fadeInRight';
+    this.leaveTransitionName = (!isIt) ? 'animated fadeOutRight' : 'animated fadeOutLeft';
   }
 }
 };

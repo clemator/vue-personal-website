@@ -91,17 +91,17 @@ export default {
   &--primary {
     background-color: $primary-green;
 
-    &:hover, &:focus {
+    &:not([disabled]):hover, &:not([disabled]):focus {
       background-color: rgba(76, 175, 80, 0.85);
     }
 
     .rippleJS .ripple {
       color: rgb(46, 55, 50);
     }
+  }
 
-    &--disabled {
-      opacity: 0.6;
-    }
+  &--disabled {
+    opacity: 0.6;
   }
 
   &--disabled,

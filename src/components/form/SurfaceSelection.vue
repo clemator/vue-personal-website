@@ -5,38 +5,89 @@
     >
       <div
         class="surface-selection__container--door"
+        :class="{ active: isDoorSelected}"
         @click="choseDoorSurface()"
       >
-        <img class="container-image" src="@/assets/images/door.svg">
+        <base-ripple
+          :color="'#000'"
+          class="surface-ripple"
+          fluid
+        >
+          <img class="container-image" src="@/assets/images/door.svg">
+        </base-ripple>
       </div>
 
       <div
         class="surface-selection__container--wall"
+        :class="{ active: isWallSelected}"
         @click="choseWallSurface()"
       >
-        <img class="container-image" src="@/assets/images/wall.svg">
+        <base-ripple
+          :color="'#000'"
+          class="surface-ripple"
+          fluid
+        >
+          <img class="container-image" src="@/assets/images/wall.svg">
+        </base-ripple>
       </div>
+    </div>
+    <div
+      class="surface-selection__footer"
+    >
+      <BaseButton
+        class="submit-button"
+        type="submit"
+        :status="isSurfaceSelected ? 'default' : 'disabled'"
+        @click="submitChoice()"
+      >
+        Valider
+      </BaseButton>
     </div>
   </div>
 </template>
 
 <script>
 import { WIZARD } from './../../utils/constants/index';
+import BaseRipple from './../bootstrap/effect/BaseRipple';
+import BaseButton from './../bootstrap/button/BaseButton';
 
 export default {
   name: 'SurfaceSelection',
+  components: {
+    BaseRipple,
+    BaseButton
+  },
+  data() {
+    return {
+      surfaceSelected: WIZARD.SURFACES.NONE
+    }
+  },
   props: {
     callback: {
       type: Function,
       required: true
     }
   },
+  computed: {
+    isDoorSelected() {
+      return this.surfaceSelected === WIZARD.SURFACES.DOOR;
+    },
+    isWallSelected() {
+      return this.surfaceSelected === WIZARD.SURFACES.WALL;
+    },
+    isSurfaceSelected() {
+      return this.surfaceSelected !== WIZARD.SURFACES.NONE;
+    }
+  },
   methods: {
     choseDoorSurface() {
-      this.callback(WIZARD.SURFACES.DOOR);
+      this.surfaceSelected = WIZARD.SURFACES.DOOR;
     },
     choseWallSurface() {
-      this.callback(WIZARD.SURFACES.WALL);
+      this.surfaceSelected = WIZARD.SURFACES.WALL;
+    },
+    submitChoice() {
+      this.callback(this.surfaceSelected);
     }
   }
 }
@@ -45,34 +96,51 @@ export default {
 <style lang="scss">
 .surface-selection {
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 25px;
   &__container {
-    height: 100%;
+    flex: 1;
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    padding: 25px 0;
     &--door, &--wall {
-      display: flex;
-      justify-content: center;
       width: 40%;
-      height: 90%;
       box-sizing: border-box;
       padding: 20px;
       border: 1px solid $light-grey;
       border-radius: 6px;
-      transition-property: border, padding;
-      transition-duration: 0.3s;
-      transition-delay: 0s;
-      transition-timing-function: ease;
+      transition: border 0.3s, padding 0.3s;
       cursor: pointer;
-      .container-image {
-        width: 100%;
+
+      .surface-ripple {
+        display: flex;
+        justify-content: center;
+        user-select: none;
+        .container-image {
+          width: 100%;
+        }
       }
-      &:hover {
+
+      &:hover, &.active {
         padding: 15px;
         border-width: 5px;
+      }
+      &:hover {
+        border-color: $primary-dark-green;
+      }
+      &.active {
         border-color: $primary-green;
       }
     }
   }
+  &__footer {
+    display: flex;
+    justify-content: center;
+    .submit-button {
+      padding: 5px 20px;
+    }
+  }
+  
 }
 </style>
