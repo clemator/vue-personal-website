@@ -89,7 +89,7 @@ export default {
   }
 
   &--primary {
-    background-color: rgba(76, 175, 80, 1);
+    background-color: $primary-green;
 
     &:hover, &:focus {
       background-color: rgba(76, 175, 80, 0.85);

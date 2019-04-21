@@ -19,6 +19,6 @@ export default {
 <style lang="scss">
 .anonymous-layout {
   height: 100%;
-  background-color: $background-color-light-grey;
+  background-color: $light-grey;
 }
 </style>
