@@ -4,7 +4,7 @@
 
 import { fromJSON } from './../utils/fp';
 
-const CACHE_DB_NAME = 'clematorHideout';
+const CACHE_DB_NAME = 'shapeIt';
 
 const cache = {
   handler: window.localStorage,

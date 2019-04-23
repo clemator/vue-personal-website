@@ -35,7 +35,7 @@ export default {
     SurfaceSelection,
     SurfaceComposition
   },
-  data() {
+  data () {
     return {
       enterTransitionName: '',
       leaveTransitionName: ''
@@ -56,11 +56,14 @@ export default {
     }
   },
   watch: {
-  'isSurfaceSelected' (isIt) {
-    this.enterTransitionName = (!isIt) ? 'animated fadeInLeft' : 'animated fadeInRight';
-    this.leaveTransitionName = (!isIt) ? 'animated fadeOutRight' : 'animated fadeOutLeft';
+    'isSurfaceSelected' (isIt) {
+      this.enterTransitionName = (!isIt) ? 'animated fadeInLeft' : 'animated fadeInRight';
+      this.leaveTransitionName = (!isIt) ? 'animated fadeOutRight' : 'animated fadeOutLeft';
+    }
+  },
+  created () {
+    this.$store.dispatch('shapeIt/wizard/setCacheData');
   }
-}
 };
 </script>
 
