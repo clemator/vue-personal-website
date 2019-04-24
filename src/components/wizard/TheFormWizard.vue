@@ -1,6 +1,7 @@
 <template>
   <div class="the-form-wizard">
     <transition
+      v-if="!onPending"
       name="custom-classes-transition"
       :enter-active-class="enterTransitionName"
       :leave-active-class="leaveTransitionName"
@@ -10,6 +11,7 @@
         v-if="!isSurfaceSelected"
         :callback="selectSurfaceType"
       ></surface-selection>
+
       <surface-composition
         key="paint"
         v-if="isSurfaceSelected"
@@ -43,7 +45,8 @@ export default {
   },
   computed: {
     ...mapGetters('shapeIt/wizard', [
-      'isSurfaceSelected'
+      'isSurfaceSelected',
+      'onPending'
     ])
   },
   methods: {
@@ -52,7 +55,6 @@ export default {
     },
     resetSurfaceChoice() {
       this.$store.dispatch('shapeIt/wizard/resetSurfaceType');
-
     }
   },
   watch: {
