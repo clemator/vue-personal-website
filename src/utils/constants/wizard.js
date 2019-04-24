@@ -11,8 +11,8 @@ const WIZARD = {
     DIAMOND: {
       NAME: 'diamond'
     },
-    HEXAGONE: {
-      NAME: 'hexagone'
+    HEXAGON: {
+      NAME: 'hexagon'
     },
     RUBIS: {
       NAME: 'rubis'
