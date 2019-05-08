@@ -7,7 +7,8 @@
       <div
         class="surface-composition__container__left-part"
       >
-        <img class="container-image" :src="require(`@/assets/images/${currentSurface}.svg`)">
+        <!--<img class="container-image" :src="require(`@/assets/images/${currentSurface}.svg`)">-->
+        <MatrixDisplay></MatrixDisplay>
       </div>
 
       <div
@@ -27,11 +28,13 @@
 import { mapGetters } from 'vuex';
 import { WIZARD } from './../../utils/constants/index';
 import PatternSelection from './PatternSelection';
+import MatrixDisplay from './MatrixDisplay';
 
 export default {
   name: 'SurfaceComposition',
   components: {
-    PatternSelection
+    PatternSelection,
+    MatrixDisplay
   },
   computed: {
     ...mapGetters('shapeIt/wizard', [
@@ -43,8 +46,21 @@ export default {
     }
   },
   methods: {
+    /**
+     * Select Pattern
+     *  - Dispatch to store
+     * @param {Object} pattern
+     */
     selectPattern (pattern) {
       this.$store.dispatch('shapeIt/wizard/changePatternType', pattern);
+      /*const gridOptions = {
+        length: ,
+        width: ,
+        defaultCellStatus: ,
+        defaultCellColor: ,
+        defaultCellModule: 
+      };
+      this.$store.dispatch('shapeIt/grid/initializeGrid', gridOptions);*/
     }
   }
 }
@@ -72,7 +88,7 @@ export default {
     }
     &__right-part {
       width: 50%;
-      border: 3px solid green;
+      border: 3px solid $light-grey;
       border-radius: 6px;
     }
   }

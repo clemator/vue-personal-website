@@ -18,20 +18,30 @@ const getters = {
 };
 
 const actions = {
+  /**
+   * Initialize the grid with given properties
+   * @param {Object} param0 
+   * @param {Object} gridOptions the options
+   * @param {Number} gridOptions.length grid total length
+   * @param {Number} gridOptions.width grid total width
+   * @param {String} gridOptions.defaultCellStatus the cells default status
+   * @param {String} gridOptions.defaultCellColor the cells default color
+   * @param {String} gridOptions.defaultCellModule the cells default module
+   */
   initializeGrid({ commit }, gridOptions) {
     const {
       length,
       width,
-      defaultStatus,
-      defaultColor,
-      defaultModule
+      defaultCellStatus,
+      defaultCellColor,
+      defaultCellModule
     } = gridOptions;
     let matrix = [];
     let matrixArray = [];
     const matrixArrayCell = {
-      status: defaultStatus,
-      color: defaultColor,
-      module: defaultModule
+      status: defaultCellStatus,
+      color: defaultCellColor,
+      module: defaultCellModule
     };
 
     commit('setGridSize', { length, width });
@@ -39,7 +49,7 @@ const actions = {
     for (let i = 0; i < length; i++) {
       matrixArray = [];
       for (let j = 0; j < width; j++)
-        matrixArray.push(matrixArrayCell);
+        matrixArray.push({...matrixArrayCell, X: j, Y: i});
       matrix.push(matrixArray);
     }
 

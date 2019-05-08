@@ -10,9 +10,11 @@
           v-for="(val, key) in definedPatterns"
           :key="key"
           class="pattern"
-          :class="val.NAME"
+          :class="[val.NAME, {'selected': selectedPattern === val.NAME}]"
+          @click="callback(val)"
         >
-          <img :src="require(`@/assets/images/${val.NAME}.svg`)" />
+          <!--<img :src="require(`@/assets/images/${val.NAME}.svg`)" />-->
+          {{ val.NAME }}
         </div>
       </div>
     </div>
@@ -56,8 +58,15 @@ export default {
       .pattern {
         height: 100px;
         width: 100px;
+        box-sizing: border-box;
+        padding: 2px;
         cursor: pointer;
         background-color: $light-grey;
+      }
+      .selected {
+        padding: 0;
+        border: 2px solid $primary-green;
+        border-radius: 4px;
       }
     }
   }

@@ -70,13 +70,13 @@ export default {
   },
   computed: {
     isDoorSelected() {
-      return this.surfaceSelected === WIZARD.SURFACES.DOOR;
+      return this.surfaceSelected.NAME === WIZARD.SURFACES.DOOR.NAME;
     },
     isWallSelected() {
-      return this.surfaceSelected === WIZARD.SURFACES.WALL;
+      return this.surfaceSelected.NAME === WIZARD.SURFACES.WALL.NAME;
     },
     isSurfaceSelected() {
-      return this.surfaceSelected !== WIZARD.SURFACES.NONE;
+      return this.surfaceSelected.NAME !== WIZARD.SURFACES.NONE.NAME;
     }
   },
   methods: {
