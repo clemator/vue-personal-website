@@ -26,7 +26,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { WIZARD } from './../../utils/constants/index';
+import { WIZARD, CELL } from './../../utils/constants/index';
 import PatternSelection from './PatternSelection';
 import MatrixDisplay from './MatrixDisplay';
 
@@ -53,14 +53,16 @@ export default {
      */
     selectPattern (pattern) {
       this.$store.dispatch('shapeIt/wizard/changePatternType', pattern);
-      /*const gridOptions = {
-        length: ,
-        width: ,
-        defaultCellStatus: ,
-        defaultCellColor: ,
-        defaultCellModule: 
+      const gridOptions = {
+        height: this.currentSurface.HEIGHT,
+        width: this.currentSurface.WIDTH,
+        defaultCellStatus: CELL.STATUS.DEFAULT,
+        defaultCellColor: CELL.COLORS.NONE,
+        defaultCellModule: CELL.MODULES.NONE,
+        patternHeight: pattern.HEIGHT,
+        patternWidth: pattern.WIDTH
       };
-      this.$store.dispatch('shapeIt/grid/initializeGrid', gridOptions);*/
+      this.$store.dispatch('shapeIt/grid/initializeGrid', gridOptions);
     }
   }
 }
@@ -78,7 +80,7 @@ export default {
       box-sizing: border-box;
     }
     &__left-part {
-      width: 40%;
+      width: 55%;
       display: flex;
       justify-content: center;
       align-items: stretch;
@@ -87,7 +89,7 @@ export default {
       }
     }
     &__right-part {
-      width: 50%;
+      width: 45%;
       border: 3px solid $light-grey;
       border-radius: 6px;
     }

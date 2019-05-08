@@ -76,7 +76,8 @@ const actions = {
    *  - Also reset in cache
    * @param {Object} store
    */
-  resetSurfaceType({ commit }) {
+  resetSurfaceType({ commit, dispatch }) {
+    dispatch('shapeIt/grid/resetGrid', undefined, {root:true});
     commit('setSurface', WIZARD.SURFACES.NONE);
     cache.set('WIZARD', 'SURFACE', WIZARD.SURFACES.NONE.NAME);
   },

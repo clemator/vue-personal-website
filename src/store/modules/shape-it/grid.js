@@ -1,7 +1,7 @@
 import { CELL } from './../../../utils/constants/index';
 
 const state = {
-  length: 10,
+  height: 10,
   width: 10,
   gridMatrix: []
 };
@@ -22,7 +22,7 @@ const actions = {
    * Initialize the grid with given properties
    * @param {Object} param0 
    * @param {Object} gridOptions the options
-   * @param {Number} gridOptions.length grid total length
+   * @param {Number} gridOptions.height grid total height
    * @param {Number} gridOptions.width grid total width
    * @param {String} gridOptions.defaultCellStatus the cells default status
    * @param {String} gridOptions.defaultCellColor the cells default color
@@ -30,11 +30,13 @@ const actions = {
    */
   initializeGrid({ commit }, gridOptions) {
     const {
-      length,
+      height,
       width,
       defaultCellStatus,
       defaultCellColor,
-      defaultCellModule
+      defaultCellModule,
+      patternHeight,
+      patternWidth
     } = gridOptions;
     let matrix = [];
     let matrixArray = [];
@@ -43,26 +45,36 @@ const actions = {
       color: defaultCellColor,
       module: defaultCellModule
     };
+    const gridSize = {
+      height: Math.floor(height / patternHeight),
+      width: Math.floor(width / patternWidth)
+    }
 
-    commit('setGridSize', { length, width });
+    commit('setGridSize', gridSize);
 
-    for (let i = 0; i < length; i++) {
+    for (let i = 0; i < gridSize.height; i++) {
       matrixArray = [];
-      for (let j = 0; j < width; j++)
+      for (let j = 0; j < gridSize.width; j++) {
         matrixArray.push({...matrixArrayCell, X: j, Y: i});
+      }
       matrix.push(matrixArray);
     }
+    console.log(matrix);
 
     commit('setGridContent', matrix);
   },
   changeCellStatus({ commit }, cell) {
     commit('setCellStatus', cell);
+  },
+  resetGrid({ commit }) {
+    commit('setGridContent', []);
+    commit('setGridSize', {});
   }
 };
 
 const mutations = {
-  setGridSize(state, { length, width }) {
-    state.length = length;
+  setGridSize(state, { height, width }) {
+    state.height = height;
     state.width = width;
   },
   setGridContent(state, matrix) {
