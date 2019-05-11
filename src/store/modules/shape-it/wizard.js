@@ -1,4 +1,4 @@
-import { WIZARD, CELL } from './../../../utils/constants/index';
+import { WIZARD } from './../../../utils/constants/index';
 import cache from './../../../storage/cache';
 import { isEmpty } from './../../../utils/fp';
 
