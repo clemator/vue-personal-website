@@ -16,9 +16,15 @@
       >
         <PatternSelection
           :callback="selectPattern"
-          :selectedPattern="currentPatternName"
+          :selectedPattern="currentPattern.NAME"
           :patterns="patternTypes"
         ></PatternSelection>
+
+        <ColorSelection
+          :callback="selectColor"
+          :selectedColor="currentColor"
+          :colors="colorList"
+        ></ColorSelection>
       </div>
     </div>
   </div>
@@ -28,21 +34,38 @@
 import { mapGetters } from 'vuex';
 import { WIZARD, CELL } from './../../utils/constants/index';
 import PatternSelection from './PatternSelection';
+import ColorSelection from './ColorSelection';
 import MatrixDisplay from './MatrixDisplay';
 
 export default {
   name: 'SurfaceComposition',
   components: {
     PatternSelection,
+    ColorSelection,
     MatrixDisplay
   },
   computed: {
     ...mapGetters('shapeIt/wizard', [
       'currentSurface',
-      'currentPatternName'
+      'currentPattern',
+      'currentColor'
     ]),
     patternTypes () {
       return WIZARD.PATTERNS;
+    },
+    colorList() {
+      return WIZARD.COLORS;
+    },
+    gridOptions () {
+      return {
+        height: this.currentSurface.HEIGHT,
+        width: this.currentSurface.WIDTH,
+        defaultCellStatus: CELL.STATUS.DEFAULT,
+        defaultCellColor: WIZARD.COLORS.NONE,
+        defaultCellModule: CELL.MODULES.NONE,
+        patternHeight: this.currentPattern.HEIGHT,
+        patternWidth: this.currentPattern.WIDTH
+      }
     }
   },
   methods: {
@@ -53,17 +76,20 @@ export default {
      */
     selectPattern (pattern) {
       this.$store.dispatch('shapeIt/wizard/changePatternType', pattern);
-      const gridOptions = {
-        height: this.currentSurface.HEIGHT,
-        width: this.currentSurface.WIDTH,
-        defaultCellStatus: CELL.STATUS.DEFAULT,
-        defaultCellColor: CELL.COLORS.NONE,
-        defaultCellModule: CELL.MODULES.NONE,
-        patternHeight: pattern.HEIGHT,
-        patternWidth: pattern.WIDTH
-      };
-      this.$store.dispatch('shapeIt/grid/initializeGrid', gridOptions);
-    }
+      this.$store.dispatch('shapeIt/grid/initializeGrid', this.gridOptions);
+    },
+    /**
+     * Select Color
+     *  - Dispatch to store
+     * @param {String} color
+     */
+    selectColor (color) {
+      this.$store.dispatch('shapeIt/wizard/changeColor', color);
+    },
+  },
+  created() {
+    if (this.currentPattern.NAME !== WIZARD.PATTERNS.NONE.NAME)
+      this.$store.dispatch('shapeIt/grid/initializeGrid', this.gridOptions);
   }
 }
 </script>
@@ -83,7 +109,7 @@ export default {
       width: 55%;
       display: flex;
       justify-content: center;
-      align-items: stretch;
+      align-items: center;
       .container-image {
         width: 100%;
       }

@@ -38,6 +38,16 @@ const WIZARD = {
       WIDTH: 10,
       HEIGHT: 10
     }
+  },
+  COLORS: {
+    NONE: '',
+    YELLOW: 'yellow',
+    GREEN: 'green',
+    BLUE: 'blue',
+    RED: 'red',
+    BLACK: 'black',
+    GREY: 'grey',
+    GRAY: 'gray'
   }
 };
 

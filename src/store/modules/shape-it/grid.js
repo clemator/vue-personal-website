@@ -14,7 +14,8 @@ const getters = {
     return !state.gridMatrix.some(array => {
       return array.some(cell => cell.status !== CELL.STATUS.DEFAULT);
     });
-  }
+  },
+  getCell: state => ({ X, Y }) => state.gridMatrix[Y][X]
 };
 
 const actions = {
@@ -59,12 +60,14 @@ const actions = {
       }
       matrix.push(matrixArray);
     }
-    console.log(matrix);
 
     commit('setGridContent', matrix);
   },
   changeCellStatus({ commit }, cell) {
     commit('setCellStatus', cell);
+  },
+  changeCellColor({ commit }, cell) {
+    commit('setCellColor', cell);
   },
   resetGrid({ commit }) {
     commit('setGridContent', []);
@@ -80,8 +83,12 @@ const mutations = {
   setGridContent(state, matrix) {
     state.gridMatrix = matrix;
   },
-  setCellStatus(state, { status, position, index }) {
-    state.gridMatrix[index][position].status = status;
+  setCellStatus(state, { status, X, Y }) {
+    state.gridMatrix[Y][X].status = status;
+  },
+  setCellColor(state, { color, X, Y }) {
+    state.gridMatrix[Y][X].color = color;
+    state.gridMatrix[Y][X].status = CELL.STATUS.MODIFIED;
   }
 };
 

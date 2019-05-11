@@ -1,4 +1,4 @@
-import { WIZARD } from './../../../utils/constants/index';
+import { WIZARD, CELL } from './../../../utils/constants/index';
 import cache from './../../../storage/cache';
 import { isEmpty } from './../../../utils/fp';
 
@@ -6,13 +6,15 @@ const state = {
   onPending: true,
   surface: {},
   pattern: {},
+  color:  '',
   errors: {}
 };
 
 const getters = {
   isSurfaceSelected: state => state.surface.NAME !== WIZARD.SURFACES.NONE.NAME,
   currentSurface: state => state.surface,
-  currentPatternName: state => state.pattern.NAME || WIZARD.PATTERNS.NONE.NAME,
+  currentPattern: state => state.pattern,
+  currentColor: state => state.color,
   errors: state => state.errors,
   onPending: state => state.onPending
 };
@@ -21,25 +23,29 @@ const actions = {
   /**
    * Set Cache Data
    *  - Retrieve cached data and hydrate the store
-   * @param {Object} store
+   * @param {Object} context
    */
   async setCacheData({ commit }) {
     const surface = await cache.get('WIZARD', 'SURFACE');
     const pattern = await cache.get('WIZARD', 'PATTERN');
+    const color   = await cache.get('WIZARD', 'COLOR');
 
     if (isEmpty(surface))
       cache.set('WIZARD', 'SURFACE', WIZARD.SURFACES.NONE.NAME);
     if (isEmpty(pattern))
       cache.set('WIZARD', 'PATTERN', WIZARD.PATTERNS.NONE.NAME);
+    if (isEmpty(color))
+      cache.set('WIZARD', 'COLOR', WIZARD.COLORS.NONE);
 
     commit('setSurface', !isEmpty(surface) ? surface : WIZARD.SURFACES.NONE);
     commit('setPattern', !isEmpty(pattern) ? pattern : WIZARD.PATTERNS.NONE);
+    commit('setColor', !isEmpty(color) ? color : WIZARD.COLORS.NONE);
     commit('setPending', false);
   },
   /**
    * Change Surface Type
    *  - Set surface in store and cache
-   * @param {Object} store
+   * @param {Object} context
    * @param {Object} surface
    */
   changeSurfaceType({ commit }, surface) {
@@ -47,9 +53,19 @@ const actions = {
     cache.set('WIZARD', 'SURFACE', surface);
   },
   /**
+   * Change Color
+   *  - Set color in store and cache
+   * @param {Object} context
+   * @param {String} color
+   */
+  changeColor({ commit }, color) {
+    commit('setColor', color);
+    cache.set('WIZARD', 'COLOR', color);
+  },
+  /**
    * Change Pattern Type
    *  - Set pattern in store and cache
-   * @param {Object} store
+   * @param {Object} context
    * @param {Object} pattern
    */
   changePatternType({ commit }, pattern) {
@@ -58,7 +74,7 @@ const actions = {
   },
   /**
    * Add Error
-   * @param {Object} store
+   * @param {Object} context
    * @param {Object} error
    */
   addError({ commit }, error) {
@@ -66,7 +82,7 @@ const actions = {
   },
   /**
    * Reset Errors
-   * @param {Object} store
+   * @param {Object} context
    */
   resetErrors({ commit }) {
     commit('resetErrors');
@@ -74,7 +90,7 @@ const actions = {
   /**
    * Reset Surface Type
    *  - Also reset in cache
-   * @param {Object} store
+   * @param {Object} context
    */
   resetSurfaceType({ commit, dispatch }) {
     dispatch('shapeIt/grid/resetGrid', undefined, {root:true});
@@ -84,7 +100,7 @@ const actions = {
   /**
    * Reset Pattern Type
    *  - Also reset in cache
-   * @param {Object} store
+   * @param {Object} context
    */
   resetPatternType({ commit }) {
     commit('setPattern', WIZARD.PATTERNS.NONE);
@@ -100,6 +116,14 @@ const mutations = {
    */
   setSurface(state, surface) {
     state.surface = surface;
+  },
+  /**
+   * Set Color
+   * @param {Object} state 
+   * @param {String} color 
+   */
+  setColor(state, color) {
+    state.color = color;
   },
   /**
    * Set Pattern
