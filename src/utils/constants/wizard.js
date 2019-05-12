@@ -48,6 +48,12 @@ const WIZARD = {
     BLACK: 'black',
     GREY: 'grey',
     GRAY: 'gray'
+  },
+  MODULES: {
+    NONE: '',
+    KEYCHAIN: 'keychain',
+    HANGER: 'hanger',
+    MAGNET: 'magnet'
   }
 };
 

@@ -7,6 +7,7 @@ const state = {
   surface: {},
   pattern: {},
   color:  '',
+  module:  '',
   errors: {}
 };
 
@@ -15,6 +16,7 @@ const getters = {
   currentSurface: state => state.surface,
   currentPattern: state => state.pattern,
   currentColor: state => state.color,
+  currentModule: state => state.module,
   errors: state => state.errors,
   onPending: state => state.onPending
 };
@@ -29,6 +31,7 @@ const actions = {
     const surface = await cache.get('WIZARD', 'SURFACE');
     const pattern = await cache.get('WIZARD', 'PATTERN');
     const color   = await cache.get('WIZARD', 'COLOR');
+    const module  = await cache.get('WIZARD', 'MODULE');
 
     if (isEmpty(surface))
       cache.set('WIZARD', 'SURFACE', WIZARD.SURFACES.NONE.NAME);
@@ -36,10 +39,13 @@ const actions = {
       cache.set('WIZARD', 'PATTERN', WIZARD.PATTERNS.NONE.NAME);
     if (isEmpty(color))
       cache.set('WIZARD', 'COLOR', WIZARD.COLORS.NONE);
+    if (isEmpty(module))
+      cache.set('WIZARD', 'MODULE', WIZARD.MODULES.NONE);
 
     commit('setSurface', !isEmpty(surface) ? surface : WIZARD.SURFACES.NONE);
     commit('setPattern', !isEmpty(pattern) ? pattern : WIZARD.PATTERNS.NONE);
     commit('setColor', !isEmpty(color) ? color : WIZARD.COLORS.NONE);
+    commit('setModule', !isEmpty(module) ? module : WIZARD.MODULES.NONE);
     commit('setPending', false);
   },
   /**
@@ -61,6 +67,16 @@ const actions = {
   changeColor({ commit }, color) {
     commit('setColor', color);
     cache.set('WIZARD', 'COLOR', color);
+  },
+  /**
+   * Change Module
+   *  - Set module in store and cache
+   * @param {Object} context
+   * @param {String} module
+   */
+  changeModule({ commit }, module) {
+    commit('setModule', module);
+    cache.set('WIZARD', 'MODULE', module);
   },
   /**
    * Change Pattern Type
@@ -124,6 +140,14 @@ const mutations = {
    */
   setColor(state, color) {
     state.color = color;
+  },
+  /**
+   * Set Module
+   * @param {Object} state 
+   * @param {String} module 
+   */
+  setModule(state, module) {
+    state.module = module;
   },
   /**
    * Set Pattern

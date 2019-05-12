@@ -25,6 +25,12 @@
           :selectedColor="currentColor"
           :colors="colorList"
         ></ColorSelection>
+
+        <ModuleSelection
+          :callback="selectModule"
+          :selectedModule="currentModule"
+          :modules="moduleList"
+        ></ModuleSelection>
       </div>
     </div>
   </div>
@@ -35,6 +41,7 @@ import { mapGetters } from 'vuex';
 import { WIZARD, CELL } from './../../utils/constants/index';
 import PatternSelection from './PatternSelection';
 import ColorSelection from './ColorSelection';
+import ModuleSelection from './ModuleSelection';
 import MatrixDisplay from './MatrixDisplay';
 
 export default {
@@ -42,12 +49,14 @@ export default {
   components: {
     PatternSelection,
     ColorSelection,
+    ModuleSelection,
     MatrixDisplay
   },
   computed: {
     ...mapGetters('shapeIt/wizard', [
       'currentSurface',
       'currentPattern',
+      'currentModule',
       'currentColor'
     ]),
     patternTypes () {
@@ -56,13 +65,16 @@ export default {
     colorList() {
       return WIZARD.COLORS;
     },
+    moduleList() {
+      return WIZARD.MODULES;
+    },
     gridOptions () {
       return {
         height: this.currentSurface.HEIGHT,
         width: this.currentSurface.WIDTH,
         defaultCellStatus: CELL.STATUS.DEFAULT,
         defaultCellColor: WIZARD.COLORS.NONE,
-        defaultCellModule: CELL.MODULES.NONE,
+        defaultCellModule: WIZARD.MODULES.NONE,
         patternHeight: this.currentPattern.HEIGHT,
         patternWidth: this.currentPattern.WIDTH
       }
@@ -86,6 +98,14 @@ export default {
     selectColor (color) {
       this.$store.dispatch('shapeIt/wizard/changeColor', color);
     },
+    /**
+     * Select Module
+     *  - Dispatch to store
+     * @param {String} module
+     */
+    selectModule (module) {
+      this.$store.dispatch('shapeIt/wizard/changeModule', module);
+    }
   },
   created() {
     if (this.currentPattern.NAME !== WIZARD.PATTERNS.NONE.NAME)
