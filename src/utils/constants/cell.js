@@ -1,7 +1,8 @@
 const CELL = {
   STATUS: {
     DEFAULT: 'default',
-    MODIFIED: 'modified'
+    MODIFIED: 'modified',
+    HIDDEN: 'hidden'
   }
 };
 

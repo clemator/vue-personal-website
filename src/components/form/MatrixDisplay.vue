@@ -9,6 +9,7 @@
       >
         <MatrixCell
           :data="cell"
+          :isCellHidden="(onPreview && cell.status === 'default') ? true : false"
           @cell-click="onCellClick"
         ></MatrixCell>
       </div>
@@ -30,12 +31,19 @@ export default {
       grid: state => state.gridMatrix
     }),
     ...mapGetters('shapeIt/wizard', [
-      'currentColor'
+      'currentColor',
+      'currentModule',
+      'isColorSelected',
+      'isModuleSelected',
+      'onPreview'
     ])
   },
   methods: {
     onCellClick(data) {
-      this.$store.dispatch('shapeIt/grid/changeCellColor', { ...data, color: this.currentColor });
+      if (this.isColorSelected)
+        this.$store.dispatch('shapeIt/grid/changeCellColor', { ...data, color: this.currentColor });
+      else if (this.isModuleSelected)
+        this.$store.dispatch('shapeIt/grid/changeCellModule', { ...data, module: this.currentModule });
     }
   }
 }

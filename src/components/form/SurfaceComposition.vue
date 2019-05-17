@@ -31,6 +31,14 @@
           :selectedModule="currentModule"
           :modules="moduleList"
         ></ModuleSelection>
+
+        <BaseButton
+          @click="toggleSurfacePreview"
+          :status="isMatrixUntouched ? 'disabled' : 'default'"
+          class="submit-button"
+        >
+          Submit
+        </BaseButton>
       </div>
     </div>
   </div>
@@ -39,6 +47,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import { WIZARD, CELL } from './../../utils/constants/index';
+import BaseButton from './../bootstrap/button/BaseButton';
 import PatternSelection from './PatternSelection';
 import ColorSelection from './ColorSelection';
 import ModuleSelection from './ModuleSelection';
@@ -50,14 +59,19 @@ export default {
     PatternSelection,
     ColorSelection,
     ModuleSelection,
-    MatrixDisplay
+    MatrixDisplay,
+    BaseButton
   },
   computed: {
     ...mapGetters('shapeIt/wizard', [
       'currentSurface',
       'currentPattern',
       'currentModule',
-      'currentColor'
+      'currentColor',
+      'onPreview'
+    ]),
+    ...mapGetters('shapeIt/grid', [
+      'isMatrixUntouched'
     ]),
     patternTypes () {
       return WIZARD.PATTERNS;
@@ -88,7 +102,8 @@ export default {
      */
     selectPattern (pattern) {
       this.$store.dispatch('shapeIt/wizard/changePatternType', pattern);
-      this.$store.dispatch('shapeIt/grid/initializeGrid', this.gridOptions);
+      if (this.isMatrixUntouched)
+        this.$store.dispatch('shapeIt/grid/initializeGrid', this.gridOptions);
     },
     /**
      * Select Color
@@ -105,6 +120,15 @@ export default {
      */
     selectModule (module) {
       this.$store.dispatch('shapeIt/wizard/changeModule', module);
+    },
+    /**
+     * Toggle Surface Preview
+     */
+    toggleSurfacePreview() {
+      if (!this.onPreview)
+        this.$store.dispatch('shapeIt/wizard/setPreview');
+      else
+        this.$store.dispatch('shapeIt/wizard/cancelPreview');
     }
   },
   created() {
@@ -138,6 +162,9 @@ export default {
       width: 45%;
       border: 3px solid $light-grey;
       border-radius: 6px;
+      .submit-button {
+        padding: 10px 20px;
+      }
     }
   }
 }

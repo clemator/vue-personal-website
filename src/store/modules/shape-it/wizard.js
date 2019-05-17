@@ -6,8 +6,11 @@ const state = {
   onPending: true,
   surface: {},
   pattern: {},
-  color:  '',
-  module:  '',
+  selectedType: {
+    color: '',
+    module: ''
+  },
+  onPreview: false,
   errors: {}
 };
 
@@ -15,10 +18,13 @@ const getters = {
   isSurfaceSelected: state => state.surface.NAME !== WIZARD.SURFACES.NONE.NAME,
   currentSurface: state => state.surface,
   currentPattern: state => state.pattern,
-  currentColor: state => state.color,
-  currentModule: state => state.module,
+  isColorSelected: state => state.selectedType.color !== WIZARD.COLORS.NONE,
+  isModuleSelected: state => state.selectedType.module !== WIZARD.MODULES.NONE,
+  currentColor: state => state.selectedType.color,
+  currentModule: state => state.selectedType.module,
   errors: state => state.errors,
-  onPending: state => state.onPending
+  onPending: state => state.onPending,
+  onPreview: state => state.onPreview
 };
 
 const actions = {
@@ -61,22 +67,28 @@ const actions = {
   /**
    * Change Color
    *  - Set color in store and cache
+   *  - Unset module as both cannot be active at the same time
    * @param {Object} context
    * @param {String} color
    */
   changeColor({ commit }, color) {
     commit('setColor', color);
+    commit('setModule', WIZARD.MODULES.NONE);
     cache.set('WIZARD', 'COLOR', color);
+    cache.set('WIZARD', 'MODULE', WIZARD.MODULES.NONE);
   },
   /**
    * Change Module
    *  - Set module in store and cache
+   *  - Unset color as both cannot be active at the same time
    * @param {Object} context
    * @param {String} module
    */
   changeModule({ commit }, module) {
     commit('setModule', module);
+    commit('setColor', WIZARD.COLORS.NONE);
     cache.set('WIZARD', 'MODULE', module);
+    cache.set('WIZARD', 'COLOR', WIZARD.COLORS.NONE);
   },
   /**
    * Change Pattern Type
@@ -121,6 +133,22 @@ const actions = {
   resetPatternType({ commit }) {
     commit('setPattern', WIZARD.PATTERNS.NONE);
     cache.set('WIZARD', 'PATTERN', WIZARD.PATTERNS.NONE.NAME);
+  },
+  /**
+   * Set Preview
+   *  - Set the wizard into preview mode
+   * @param {Object} context 
+   */
+  setPreview({ commit }) {
+    commit('setPreview', true);
+  },
+  /**
+   * Cancel Preview
+   *  - Undo the preview mode
+   * @param {Object} context 
+   */
+  cancelPreview({ commit }) {
+    commit('setPreview', false);
   }
 };
 
@@ -139,7 +167,7 @@ const mutations = {
    * @param {String} color 
    */
   setColor(state, color) {
-    state.color = color;
+    state.selectedType.color = color;
   },
   /**
    * Set Module
@@ -147,7 +175,7 @@ const mutations = {
    * @param {String} module 
    */
   setModule(state, module) {
-    state.module = module;
+    state.selectedType.module = module;
   },
   /**
    * Set Pattern
@@ -179,6 +207,15 @@ const mutations = {
    */
   setPending(state, value) {
     state.onPending = value;
+  },
+  /**
+   * Set Preview
+   *  - Flag indicating if wizard is on preview
+   * @param {Object} state 
+   * @param {Boolean} value 
+   */
+  setPreview(state, value) {
+    state.onPreview = value;
   }
 };
 

@@ -1,4 +1,5 @@
 import { CELL } from './../../../utils/constants/index';
+import { filter, flatten } from './../../../utils/fp';
 
 const state = {
   height: 10,
@@ -7,10 +8,10 @@ const state = {
 };
 
 const getters = {
-  touchedMatrixCells: state => {
-    return state.gridMatrix;
+  modifiedMatrixCells: state => {
+    return filter(cell => cell.status !== CELL.STATUS.DEFAULT, flatten(state.gridMatrix));
   },
-  isUntouched: state => {
+  isMatrixUntouched: state => {
     return !state.gridMatrix.some(array => {
       return array.some(cell => cell.status !== CELL.STATUS.DEFAULT);
     });
@@ -69,6 +70,9 @@ const actions = {
   changeCellColor({ commit }, cell) {
     commit('setCellColor', cell);
   },
+  changeCellModule({ commit }, cell) {
+    commit('setCellModule', cell);
+  },
   resetGrid({ commit }) {
     commit('setGridContent', []);
     commit('setGridSize', {});
@@ -88,6 +92,10 @@ const mutations = {
   },
   setCellColor(state, { color, X, Y }) {
     state.gridMatrix[Y][X].color = color;
+    state.gridMatrix[Y][X].status = CELL.STATUS.MODIFIED;
+  },
+  setCellModule(state, { module, X, Y }) {
+    state.gridMatrix[Y][X].module = module;
     state.gridMatrix[Y][X].status = CELL.STATUS.MODIFIED;
   }
 };
