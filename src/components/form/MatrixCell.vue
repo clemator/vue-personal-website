@@ -37,6 +37,7 @@ export default {
 
   &--hidden {
     border: none;
+    cursor: initial;
   }
 }
 </style>

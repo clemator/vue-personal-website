@@ -40,7 +40,9 @@ export default {
   },
   methods: {
     onCellClick(data) {
-      if (this.isColorSelected)
+      if (this.onPreview)
+        return;
+      else if (this.isColorSelected)
         this.$store.dispatch('shapeIt/grid/changeCellColor', { ...data, color: this.currentColor });
       else if (this.isModuleSelected)
         this.$store.dispatch('shapeIt/grid/changeCellModule', { ...data, module: this.currentModule });
@@ -53,6 +55,7 @@ export default {
 .matrix-display {
   display: flex;
   flex-direction: column;
+  border: 1px solid black;
   &__line {
     display: flex;
   }

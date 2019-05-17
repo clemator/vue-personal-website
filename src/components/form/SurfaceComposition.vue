@@ -32,13 +32,17 @@
           :modules="moduleList"
         ></ModuleSelection>
 
-        <BaseButton
-          @click="toggleSurfacePreview"
-          :status="isMatrixUntouched ? 'disabled' : 'default'"
-          class="submit-button"
+        <div
+          class="call-to-action-container"
         >
-          Submit
-        </BaseButton>
+          <BaseButton
+            @click="toggleSurfacePreview"
+            :status="isMatrixUntouched ? 'disabled' : 'default'"
+            class="preview-button"
+          >
+            <span>Preview</span>
+          </BaseButton>
+        </div>
       </div>
     </div>
   </div>
@@ -159,11 +163,22 @@ export default {
       }
     }
     &__right-part {
+      display: flex;
+      flex-direction: column;
       width: 45%;
       border: 3px solid $light-grey;
       border-radius: 6px;
-      .submit-button {
-        padding: 10px 20px;
+      .call-to-action-container {
+        display: flex;
+        justify-content: center;
+        padding: 50px 0;
+        .preview-button {
+          height: 40px;
+          width: 150px;
+          span {
+            line-height: 30px;
+          }
+        }
       }
     }
   }
