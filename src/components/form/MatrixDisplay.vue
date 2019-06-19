@@ -55,6 +55,7 @@ export default {
 .matrix-display {
   display: flex;
   flex-direction: column;
+  background-color: $lightGrey;
   border: 1px solid black;
   &__line {
     display: flex;

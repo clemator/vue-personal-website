@@ -55,7 +55,7 @@ export default {
       cursor: pointer;
     }
     .selected {
-      border: 2px solid $primary-green;
+      border: 2px solid $primaryGreen;
     }
   }
 }

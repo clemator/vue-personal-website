@@ -107,7 +107,7 @@ export default {
       width: 40%;
       box-sizing: border-box;
       padding: 20px;
-      border: 1px solid $light-grey;
+      border: 1px solid $lightGrey;
       border-radius: 6px;
       transition: border 0.3s, padding 0.3s;
       cursor: pointer;
@@ -126,10 +126,10 @@ export default {
         border-width: 5px;
       }
       &:hover {
-        border-color: $primary-dark-green;
+        border-color: $primaryDarkGreen;
       }
       &.active {
-        border-color: $primary-green;
+        border-color: $primaryGreen;
       }
     }
   }

@@ -166,7 +166,7 @@ export default {
       display: flex;
       flex-direction: column;
       width: 45%;
-      border: 3px solid $light-grey;
+      border: 3px solid $lightGrey;
       border-radius: 6px;
       .call-to-action-container {
         display: flex;

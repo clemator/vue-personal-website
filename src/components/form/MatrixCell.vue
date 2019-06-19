@@ -2,7 +2,7 @@
   <div
     class="matrix-cell"
     :class="{ 'matrix-cell--hidden': isCellHidden }"
-    :style="{ 'background-color': data.color }"
+    :style="{ 'background-color': getCellColor }"
     @click="$emit('cell-click', { X: data.X, Y: data.Y })"
   >
     {{ data.module ? '*' : '' }}
@@ -20,6 +20,11 @@ export default {
     isCellHidden: {
       type: Boolean,
       required: true
+    }
+  },
+  computed: {
+    getCellColor() {
+      return this.data.color || '#ffffff';
     }
   }
 }

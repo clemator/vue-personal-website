@@ -53,11 +53,11 @@ export default {
       box-sizing: border-box;
       padding: 2px;
       cursor: pointer;
-      background-color: $light-grey;
+      background-color: $lightGrey;
     }
     .selected {
       padding: 0;
-      border: 2px solid $primary-green;
+      border: 2px solid $primaryGreen;
       border-radius: 4px;
     }
   }
