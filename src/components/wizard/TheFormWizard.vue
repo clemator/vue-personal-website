@@ -28,8 +28,8 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import SurfaceSelection from './../form/SurfaceSelection';
-import SurfaceComposition from './../form/SurfaceComposition';
+import SurfaceSelection from '@/components/form/SurfaceSelection';
+import SurfaceComposition from '@/components/form/SurfaceComposition';
 
 export default {
   name: 'TheFormWizard',

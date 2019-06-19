@@ -1,4 +1,4 @@
-import { RepositoryFactory } from '../../../repositories/RepositoryFactory';
+import { RepositoryFactory } from '@/repositories/RepositoryFactory';
 const AuthenticationRepository = RepositoryFactory.get('authentication');
 
 const state = {

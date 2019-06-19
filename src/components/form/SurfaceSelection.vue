@@ -47,9 +47,8 @@
 </template>
 
 <script>
-import { WIZARD } from './../../utils/constants/index';
-import BaseRipple from './../bootstrap/effect/BaseRipple';
-import BaseButton from './../bootstrap/button/BaseButton';
+import { WIZARD } from '@/utils/constants/index';
+import { BaseButton, BaseRipple } from '@/components/bootstrap';
 
 export default {
   name: 'SurfaceSelection',

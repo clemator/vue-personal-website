@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import TopToolbar from '../components/TopToolbar.vue';
+import TopToolbar from '@/components/TopToolbar';
 
 export default {
   name: 'UserLayout',

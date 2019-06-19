@@ -2,7 +2,7 @@
  * Simple singleton performing cache methods
  */
 
-import { fromJSON } from './../utils/fp';
+import { fromJSON } from '@/utils/fp';
 
 const CACHE_DB_NAME = 'shapeIt';
 

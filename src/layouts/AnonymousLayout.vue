@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import TopToolbar from '../components/TopToolbar';
+import TopToolbar from '@/components/TopToolbar';
 
 export default {
   name: 'AnonymousLayout',

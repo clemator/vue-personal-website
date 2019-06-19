@@ -19,7 +19,7 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex';
-import MatrixCell from './MatrixCell';
+import MatrixCell from '@/components/form/MatrixCell';
 
 export default {
   name: 'MatrixDisplay',

@@ -1,6 +1,6 @@
-import { WIZARD } from './../../../utils/constants/index';
-import cache from './../../../storage/cache';
-import { isEmpty } from './../../../utils/fp';
+import { WIZARD } from '@/utils/constants/index';
+import cache from '@/storage/cache';
+import { isEmpty } from '@/utils/fp';
 
 const state = {
   onPending: true,

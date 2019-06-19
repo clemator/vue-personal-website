@@ -1,5 +1,5 @@
-import connexion from './connexion';
-import cache from './../../../storage/cache';
+import connexion from '@/store/modules/authentication/connexion';
+import cache from '@/storage/cache';
 
 const state = {
   isAuthenticated: false,

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import authentication from './modules/authentication/index';
-import shapeIt from './modules/shape-it/index';
+import authentication from '@/store/modules/authentication/index';
+import shapeIt from '@/store/modules/shape-it/index';
 
 Vue.use(Vuex);
 

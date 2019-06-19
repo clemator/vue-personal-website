@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import TopToolbar from '../components/TopToolbar';
-import NotFoundComponent from './../components/NotFoundComponent'
+import TopToolbar from '@/components/TopToolbar';
+import NotFoundComponent from '@/components/NotFoundComponent'
 
 export default {
   name: 'NotFoundLayout',

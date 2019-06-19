@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import TheFormWizard from './../components/wizard/TheFormWizard.vue';
+import TheFormWizard from '@/components/wizard/TheFormWizard';
 
 export default {
   name: 'ShapeItLayout',

@@ -28,8 +28,8 @@
 </template>
 
 <script>
-import BaseSpinner from './../effect/BaseSpinner';
-import BaseRipple from './../effect/BaseRipple';
+import BaseSpinner from '@/components/bootstrap/effect/BaseSpinner';
+import BaseRipple from '@/components/bootstrap/effect/BaseRipple';
 
 export default {
   name: 'BaseButton',

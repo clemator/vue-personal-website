@@ -74,7 +74,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import { BaseButton } from './bootstrap';
+import { BaseButton } from '@/components/bootstrap';
 
 export default {
   name: '',

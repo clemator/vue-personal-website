@@ -51,11 +51,11 @@
 <script>
 import { mapGetters } from 'vuex';
 import { WIZARD, CELL } from './../../utils/constants/index';
-import BaseButton from './../bootstrap/button/BaseButton';
-import PatternSelection from './PatternSelection';
-import ColorSelection from './ColorSelection';
-import ModuleSelection from './ModuleSelection';
-import MatrixDisplay from './MatrixDisplay';
+import { BaseButton } from '@/components/bootstrap';
+import PatternSelection from '@/components/form/PatternSelection';
+import ColorSelection from '@/components/form/ColorSelection';
+import ModuleSelection from '@/components/form/ModuleSelection';
+import MatrixDisplay from '@/components/form/MatrixDisplay';
 
 export default {
   name: 'SurfaceComposition',

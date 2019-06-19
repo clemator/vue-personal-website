@@ -2,9 +2,9 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import autofocus from 'vue-autofocus-directive';
 
-import App from './App.vue';
-import store from './store';
-import { routes, globalBeforeGuard } from './router';
+import App from '@/App.vue';
+import store from '@/store';
+import { routes, globalBeforeGuard } from '@/router';
 
 Vue.config.productionTip = false;
 

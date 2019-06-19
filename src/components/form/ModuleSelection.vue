@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { pickBy } from './../../utils/fp';
+import { pickBy } from '@/utils/fp';
 
 export default {
   name: 'ModuleSelection',

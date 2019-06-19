@@ -1,5 +1,5 @@
-import { CELL } from './../../../utils/constants/index';
-import { filter, flatten } from './../../../utils/fp';
+import { CELL } from '@/utils/constants/index';
+import { filter, flatten } from '@/utils/fp';
 
 const state = {
   height: 10,

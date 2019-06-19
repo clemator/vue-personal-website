@@ -1,11 +1,11 @@
-import UserLayout from './layouts/UserLayout';
-import AnonymousLayout from './layouts/AnonymousLayout';
-import NotFoundLayout from './layouts/NotFoundLayout';
-import ShapeItLayout from './layouts/ShapeItLayout';
+import UserLayout from '@/layouts/UserLayout';
+import AnonymousLayout from '@/layouts/AnonymousLayout';
+import NotFoundLayout from '@/layouts/NotFoundLayout';
+import ShapeItLayout from '@/layouts/ShapeItLayout';
 
-import TheLoginForm from './components/TheLoginForm';
+import TheLoginForm from '@/components/TheLoginForm';
 
-import store from './store';
+import store from '@/store';
 
 /**
  * The route configuration array

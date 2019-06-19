@@ -10,8 +10,6 @@
 </template>
 
 <script>
-import { CELL } from './../../utils/constants/index';
-
 export default {
   name: 'MatrixCell',
   props: {

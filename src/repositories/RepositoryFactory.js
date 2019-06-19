@@ -1,4 +1,4 @@
-import authenticationRepository from './authenticationRepository';
+import authenticationRepository from '@/repositories/authenticationRepository';
 
 const repositories = {
   authentication: authenticationRepository
