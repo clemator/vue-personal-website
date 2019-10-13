@@ -2,7 +2,7 @@
   <div
     :class="['matrix-cell', { 'matrix-cell--hidden': isCellHidden }]"
     :style="{ 'background-color': getCellColor }"
-    @click="$emit('onCellClick', { X: data.X, Y: data.Y })"
+    @click="$emit('onCellClick', { ...data })"
   >
     {{ data.module ? '*' : '' }}
   </div>
