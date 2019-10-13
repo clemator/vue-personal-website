@@ -1,18 +1,21 @@
 <template>
   <div
-    :class="{
+    :class="[
+      'base-ripple',
+    {
       'base-ripple--fluid': fluid,
       'base-ripple--spread': spread,
       'base-ripple--disabled': disabled
-    }"
-    class="base-ripple"
+    }]"
   >
     <slot/>
     <div
-      :class="{
+      :class="[
+        'rippleJS',
+        'base-ripple__inner',
+      {
         'fill': spread
-      }"
-      class="rippleJS base-ripple__inner"
+      }]"
     />
   </div>
 </template>

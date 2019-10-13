@@ -1,36 +1,32 @@
 <template>
-  <div
-    class="the-login-form"
-  >
+  <div class="the-login-form">
     <form
-      class="the-login-form__form"
-      :class="{'the-login-form__form--pending': onPending, 'the-login-form__form--error': error}"
+      :class="[
+        'the-login-form__form',
+      {
+        'the-login-form__form--pending': onPending,
+        'the-login-form__form--error': error
+      }]"
       @submit.prevent="login(email, password)"
     >
-      <div
-        class="input-container"
-      >
-        <div
-          class="input-label"
-        >
+      <div class="input-container">
+        <div class="input-label">
           Email
         </div>
+
         <input
-          v-autofocus
           class="base-input"
           v-model="email"
           type="email"
+          v-autofocus
         >
       </div>
 
-      <div
-        class="input-container"
-      >
-        <div
-          class="input-label"
-        >
+      <div class="input-container">
+        <div class="input-label">
           Password
         </div>
+
         <input
           class="base-input"
           v-model="password"
@@ -38,10 +34,7 @@
         >
       </div>
 
-      <div
-        class="form-call-to-action"
-      >
-
+      <div class="form-call-to-action">
         <BaseButton
           class="submit-button"
           type="submit"
@@ -51,12 +44,10 @@
           Login
         </BaseButton>
 
-        <div
-          class="error-block"
-        >
+        <div class="error-block">
           <transition
-            :duration="errorAnimationDuration"
             name="custom-classes-transition"
+            :duration="errorAnimationDuration"
             enter-active-class="animated fadeInDown"
           >
             <div
@@ -120,6 +111,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+
   &__form {
     display: flex;
     flex-direction: column;
@@ -134,9 +126,11 @@ export default {
 
     .input-container {
       width: 100%;
+
       .input-label {
         font-weight: bold;
       }
+
       .base-input {
         width: 100%;
         box-sizing: border-box;
@@ -166,8 +160,10 @@ export default {
       .submit-button {
         width: 100%;
       }
+
       .error-block {
         height: 20px;
+
         .error-text {
           font-size: 12px;
           line-height: 20px;

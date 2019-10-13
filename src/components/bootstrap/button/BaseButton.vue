@@ -1,18 +1,19 @@
 <template>
   <button
-    :class="{
+    :class="[
+      'base-button',
+    {
       'base-button--primary': variant === 'primary',
       'base-button--disabled': status === 'disabled',
       'base-button--waiting': status === 'waiting',
-    }"
+    }]"
     :disabled="status === 'disabled'"
     :type="type"
-    class="base-button"
     v-on="onEvent()"
   >
     <base-ripple
-      :color="'#000'"
       class="base-button__inner"
+      :color="'#000'"
       :disabled="status === 'disabled'"
       fluid
     >

@@ -14,11 +14,9 @@
 
       <surface-composition
         key="paint"
-        v-if="isSurfaceSelected"
+        v-else
       >
-        <div
-          @click="resetSurfaceChoice()"
-        >
+        <div @click="resetSurfaceChoice()">
           RETURN
         </div>
       </surface-composition>
@@ -74,6 +72,7 @@ export default {
   position: relative;
   height: 100%;
   overflow-x: hidden;
+
   &>* {
     position: absolute;
     width: 100%;

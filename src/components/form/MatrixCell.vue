@@ -1,9 +1,8 @@
 <template>
   <div
-    class="matrix-cell"
-    :class="{ 'matrix-cell--hidden': isCellHidden }"
+    :class="['matrix-cell', { 'matrix-cell--hidden': isCellHidden }]"
     :style="{ 'background-color': getCellColor }"
-    @click="$emit('cell-click', { X: data.X, Y: data.Y })"
+    @click="$emit('onCellClick', { X: data.X, Y: data.Y })"
   >
     {{ data.module ? '*' : '' }}
   </div>

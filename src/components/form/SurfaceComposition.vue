@@ -1,44 +1,37 @@
 <template>
   <div class="surface-composition">
-    <slot></slot>
-    <div
-      class="surface-composition__container"
-    >
-      <div
-        class="surface-composition__container__left-part"
-      >
+    <slot/>
+
+    <div class="surface-composition__container">
+      <div class="surface-composition__container__left-part">
         <!--<img class="container-image" :src="require(`@/assets/images/${currentSurface}.svg`)">-->
         <MatrixDisplay></MatrixDisplay>
       </div>
 
-      <div
-        class="surface-composition__container__right-part"
-      >
+      <div class="surface-composition__container__right-part">
         <PatternSelection
-          :callback="selectPattern"
           :selectedPattern="currentPattern.NAME"
           :patterns="patternTypes"
+          @onPatternSelection="selectPattern"
         ></PatternSelection>
 
         <ColorSelection
-          :callback="selectColor"
           :selectedColor="currentColor"
           :colors="colorList"
+          @onColorSelection="selectColor"
         ></ColorSelection>
 
         <ModuleSelection
-          :callback="selectModule"
           :selectedModule="currentModule"
           :modules="moduleList"
+          @onModuleSelection="selectModule"
         ></ModuleSelection>
 
-        <div
-          class="call-to-action-container"
-        >
+        <div class="call-to-action-container">
           <BaseButton
-            @click="toggleSurfacePreview"
-            :status="isMatrixUntouched ? 'disabled' : 'default'"
             class="preview-button"
+            :status="isMatrixUntouched ? 'disabled' : 'default'"
+            @click="toggleSurfacePreview"
           >
             <span>Preview</span>
           </BaseButton>
@@ -146,35 +139,43 @@ export default {
 .surface-composition {
   height: 100%;
   padding: 25px 20px;
+
   &__container {
     display: flex;
     justify-content: space-between;
     height: 100%;
+
     &__left-part, &__right-part {
       box-sizing: border-box;
     }
+
     &__left-part {
       width: 55%;
       display: flex;
       justify-content: center;
       align-items: center;
+
       .container-image {
         width: 100%;
       }
     }
+
     &__right-part {
       display: flex;
       flex-direction: column;
       width: 45%;
       border: 3px solid $lightGrey;
       border-radius: 6px;
+
       .call-to-action-container {
         display: flex;
         justify-content: center;
         padding: 50px 0;
+
         .preview-button {
           height: 40px;
           width: 150px;
+
           span {
             line-height: 30px;
           }

@@ -1,16 +1,18 @@
 <template>
   <div class="matrix-display">
     <div
-      v-for="line in grid"
       class="matrix-display__line"
+      v-for="(line, index) in grid"
+      :key="index"
     >
       <div
-        v-for="cell in line" :key="cell.Y + ',' + cell.X"
+        v-for="cell in line"
+        :key="cell.Y + ',' + cell.X"
       >
         <MatrixCell
           :data="cell"
           :isCellHidden="(onPreview && cell.status === 'default') ? true : false"
-          @cell-click="onCellClick"
+          @onCellClick="onCellClick"
         ></MatrixCell>
       </div>
     </div>
@@ -57,6 +59,7 @@ export default {
   flex-direction: column;
   background-color: $lightGrey;
   border: 1px solid black;
+
   &__line {
     display: flex;
   }

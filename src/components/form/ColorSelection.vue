@@ -2,12 +2,11 @@
   <div class="color-selection">
     <div class="color-selection__color-list">
       <div
+        :class="['color', { 'selected': selectedColor === val }]"
         v-for="(val, key) in definedColors"
         :key="key"
-        class="color"
-        :class="{'selected': selectedColor === val}"
         :style="{ 'background-color': val }"
-        @click="callback(val)"
+        @click="$emit('onColorSelection', val)"
       ></div>
     </div>
   </div>
@@ -19,10 +18,6 @@ import { pickBy } from '@/utils/fp';
 export default {
   name: 'ColorSelection',
   props: {
-    callback: {
-      type: Function,
-      required: true
-    },
     selectedColor: {
       type: String,
       required: true
@@ -46,6 +41,7 @@ export default {
     display: flex;
     padding: 50px 0px;
     justify-content: space-around;
+
     .color {
       height: 30px;
       width: 30px;
@@ -54,6 +50,7 @@ export default {
       border-radius: 4px;
       cursor: pointer;
     }
+
     .selected {
       border: 2px solid $primaryGreen;
     }

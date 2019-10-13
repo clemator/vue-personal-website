@@ -2,11 +2,10 @@
   <div class="module-selection">
     <div class="module-selection__module-list">
       <div
+        :class="['module', { 'selected': selectedModule === val }]"
         v-for="(val, key) in definedModules"
         :key="key"
-        class="module"
-        :class="{'selected': selectedModule === val}"
-        @click="callback(val)"
+        @click="$emit('onModuleSelection', val)"
       >
         {{ val }}
       </div>
@@ -20,10 +19,6 @@ import { pickBy } from '@/utils/fp';
 export default {
   name: 'ModuleSelection',
   props: {
-    callback: {
-      type: Function,
-      required: true
-    },
     selectedModule: {
       type: String,
       required: true
@@ -47,6 +42,7 @@ export default {
     display: flex;
     padding: 50px 0px;
     justify-content: space-around;
+
     .module {
       height: 100px;
       width: 100px;
@@ -55,6 +51,7 @@ export default {
       cursor: pointer;
       background-color: $lightGrey;
     }
+
     .selected {
       padding: 0;
       border: 2px solid $primaryGreen;

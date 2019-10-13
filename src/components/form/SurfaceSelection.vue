@@ -1,39 +1,40 @@
 <template>
   <div class="surface-selection">
-    <div
-      class="surface-selection__container"
-    >
+    <div class="surface-selection__container">
       <div
-        class="surface-selection__container--door"
-        :class="{ active: isDoorSelected}"
+        :class="['surface-selection__container--door', { active: isDoorSelected }]"
         @click="choseDoorSurface()"
       >
         <base-ripple
-          :color="'#000'"
           class="surface-ripple"
+          :color="'#000'"
           fluid
         >
-          <img class="container-image" src="@/assets/images/door.svg">
+          <img
+            class="container-image"
+            src="@/assets/images/door.svg"
+          >
         </base-ripple>
       </div>
 
       <div
-        class="surface-selection__container--wall"
-        :class="{ active: isWallSelected}"
+        :class="['surface-selection__container--wall', { active: isWallSelected }]"
         @click="choseWallSurface()"
       >
         <base-ripple
-          :color="'#000'"
           class="surface-ripple"
+          :color="'#000'"
           fluid
         >
-          <img class="container-image" src="@/assets/images/wall.svg">
+          <img
+            class="container-image"
+            src="@/assets/images/wall.svg"
+          >
         </base-ripple>
       </div>
     </div>
-    <div
-      class="surface-selection__footer"
-    >
+
+    <div class="surface-selection__footer">
       <BaseButton
         class="submit-button"
         type="submit"
@@ -98,11 +99,13 @@ export default {
   display: flex;
   flex-direction: column;
   padding-bottom: 25px;
+
   &__container {
     flex: 1;
     display: flex;
     justify-content: space-around;
     padding: 25px 0;
+
     &--door, &--wall {
       width: 40%;
       box-sizing: border-box;
@@ -116,6 +119,7 @@ export default {
         display: flex;
         justify-content: center;
         user-select: none;
+
         .container-image {
           width: 100%;
         }
@@ -125,17 +129,21 @@ export default {
         padding: 15px;
         border-width: 5px;
       }
+
       &:hover {
         border-color: $primaryDarkGreen;
       }
+
       &.active {
         border-color: $primaryGreen;
       }
     }
   }
+
   &__footer {
     display: flex;
     justify-content: center;
+
     .submit-button {
       padding: 5px 20px;
     }
