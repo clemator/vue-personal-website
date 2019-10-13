@@ -24,7 +24,7 @@ const cache = {
    * Set a value in cache
    * @param {String} store
    * @param {String} key
-   * @param {Promise} <*>
+   * @return {Promise} <*>
    */
   set(store, key, value) {
     let keyName = `${CACHE_DB_NAME}::${store}::${key}`;

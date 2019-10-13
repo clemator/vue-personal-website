@@ -33,7 +33,7 @@
             :status="isMatrixUntouched ? 'disabled' : 'default'"
             @click="toggleSurfacePreview"
           >
-            <span>Preview</span>
+            <span>{{ onPreview ? 'Back to composition' : 'Preview'}}</span>
           </BaseButton>
         </div>
       </div>
@@ -131,6 +131,7 @@ export default {
   created() {
     if (this.currentPattern.NAME !== WIZARD.PATTERNS.NONE.NAME)
       this.$store.dispatch('shapeIt/grid/initializeGrid', this.gridOptions);
+    this.$store.dispatch('shapeIt/grid/setCacheData');
   }
 }
 </script>
@@ -174,7 +175,6 @@ export default {
 
         .preview-button {
           height: 40px;
-          width: 150px;
 
           span {
             line-height: 30px;

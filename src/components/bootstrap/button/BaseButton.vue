@@ -74,7 +74,7 @@ export default {
 .base-button {
   display: inline-flex;
 
-  padding: 0;
+  padding: 0 16px;
   font-size: 15px;
   font-weight: bold;
   text-align: center;

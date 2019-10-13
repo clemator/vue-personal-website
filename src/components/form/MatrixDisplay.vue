@@ -53,17 +53,19 @@ export default {
       // On preview mode or if no color and module selected, do not allow any interactions with cells
       if (this.onPreview || (!this.isColorSelected && !this.isModuleSelected))
         return;
-      // On color selection mode, if the cell color is the same as the color selection, reset it
+      // On color selection mode, if the cell color is the same as the color selection and the cell has no module, reset it
       // Otherwise, set the cell color
       else if (this.isColorSelected) {
         modifiedCellData.color = (this.currentColor !== cellData.color) ? this.currentColor : WIZARD.COLORS.NONE;
-        modifiedCellData.status = (this.currentColor !== cellData.color) ? CELL.STATUS.MODIFIED : CELL.STATUS.DEFAULT;
+        modifiedCellData.status = (this.currentColor !== cellData.color || cellData.module)
+          ? CELL.STATUS.MODIFIED : CELL.STATUS.DEFAULT;
       }
-      // On module selection mode, if the cell module is the same as the module selection, reset it
+      // On module selection mode, if the cell module is the same as the module selection and the cell has no color, reset it
       // Otherwise, set the cell module
       else if (this.isModuleSelected) {
         modifiedCellData.module = (this.currentModule !== cellData.module) ? this.currentModule : WIZARD.MODULES.NONE;
-        modifiedCellData.status = (this.currentModule !== cellData.module) ? CELL.STATUS.MODIFIED : CELL.STATUS.DEFAULT;
+        modifiedCellData.status = (this.currentModule !== cellData.module || cellData.color)
+          ? CELL.STATUS.MODIFIED : CELL.STATUS.DEFAULT;
       }
 
       this.$store.dispatch('shapeIt/grid/setCellData', modifiedCellData);

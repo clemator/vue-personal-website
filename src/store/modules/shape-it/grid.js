@@ -1,5 +1,6 @@
 import { CELL } from '@/utils/constants/index';
-import { filter, flatten } from '@/utils/fp';
+import { filter, flatten, isEmpty } from '@/utils/fp';
+import cache from '@/storage/cache';
 
 const state = {
   height: 10,
@@ -20,6 +21,21 @@ const getters = {
 };
 
 const actions = {
+  /**
+   * Set Cache Data
+   *  - Retrieve cached data and hydrate the store
+   * @param {Object} context
+   */
+  async setCacheData({ commit }) {
+    const cells = await cache.get('GRID', 'CELLS');
+
+    if (isEmpty(cells))
+      cache.set('GRID', 'CELLS', []);
+
+    cells.forEach((cell) => {
+      commit('mutateCellData', cell);
+    });
+  },
   /**
    * Initialize the grid with given properties
    * @param {Object} param0 
@@ -64,12 +80,14 @@ const actions = {
 
     commit('setGridContent', matrix);
   },
-  setCellData({ commit }, cell) {
+  async setCellData({ commit, getters }, cell) {
     commit('mutateCellData', cell);
+    await cache.set('GRID', 'CELLS', getters.modifiedMatrixCells);
   },
-  resetGrid({ commit }) {
+  async resetGrid({ commit }) {
     commit('setGridContent', []);
     commit('setGridSize', {});
+    await cache.set('GRID', 'CELLS', undefined);
   }
 };
 
