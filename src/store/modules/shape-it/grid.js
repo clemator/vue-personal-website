@@ -64,14 +64,8 @@ const actions = {
 
     commit('setGridContent', matrix);
   },
-  changeCellStatus({ commit }, cell) {
-    commit('setCellStatus', cell);
-  },
-  changeCellColor({ commit }, cell) {
-    commit('setCellColor', cell);
-  },
-  changeCellModule({ commit }, cell) {
-    commit('setCellModule', cell);
+  setCellData({ commit }, cell) {
+    commit('mutateCellData', cell);
   },
   resetGrid({ commit }) {
     commit('setGridContent', []);
@@ -87,17 +81,11 @@ const mutations = {
   setGridContent(state, matrix) {
     state.gridMatrix = matrix;
   },
-  setCellStatus(state, { status, X, Y }) {
+  mutateCellData(state, { X, Y, status, color, module }) {
     state.gridMatrix[Y][X].status = status;
-  },
-  setCellColor(state, { color, X, Y }) {
     state.gridMatrix[Y][X].color = color;
-    state.gridMatrix[Y][X].status = CELL.STATUS.MODIFIED;
-  },
-  setCellModule(state, { module, X, Y }) {
     state.gridMatrix[Y][X].module = module;
-    state.gridMatrix[Y][X].status = CELL.STATUS.MODIFIED;
-  }
+  },
 };
 
 export default {

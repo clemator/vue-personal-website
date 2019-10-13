@@ -22,7 +22,7 @@
 <script>
 import { mapState, mapGetters } from 'vuex';
 import MatrixCell from '@/components/form/MatrixCell';
-import { WIZARD } from './../../utils/constants/index';
+import { CELL, WIZARD } from '@/utils/constants/index';
 
 export default {
   name: 'MatrixDisplay',
@@ -48,27 +48,25 @@ export default {
      * @param {Object} cellData
      */
     onCellClick(cellData) {
-      // On preview mode, do not allow any interactions with cells
-      if (this.onPreview)
+      const modifiedCellData = { ...cellData };
+
+      // On preview mode or if no color and module selected, do not allow any interactions with cells
+      if (this.onPreview || (!this.isColorSelected && !this.isModuleSelected))
         return;
       // On color selection mode, if the cell color is the same as the color selection, reset it
       // Otherwise, set the cell color
       else if (this.isColorSelected) {
-        this.$store.dispatch('shapeIt/grid/changeCellColor',
-        {
-          ...cellData,
-          color: (this.currentColor !== cellData.color) ? this.currentColor : WIZARD.COLORS.NONE
-        });
+        modifiedCellData.color = (this.currentColor !== cellData.color) ? this.currentColor : WIZARD.COLORS.NONE;
+        modifiedCellData.status = (this.currentColor !== cellData.color) ? CELL.STATUS.MODIFIED : CELL.STATUS.DEFAULT;
       }
       // On module selection mode, if the cell module is the same as the module selection, reset it
       // Otherwise, set the cell module
       else if (this.isModuleSelected) {
-        this.$store.dispatch('shapeIt/grid/changeCellModule',
-        {
-          ...cellData,
-          module: (this.currentModule !== cellData.module) ? this.currentModule : WIZARD.MODULES.NONE
-        });
+        modifiedCellData.module = (this.currentModule !== cellData.module) ? this.currentModule : WIZARD.MODULES.NONE;
+        modifiedCellData.status = (this.currentModule !== cellData.module) ? CELL.STATUS.MODIFIED : CELL.STATUS.DEFAULT;
       }
+
+      this.$store.dispatch('shapeIt/grid/setCellData', modifiedCellData);
     }
   }
 }

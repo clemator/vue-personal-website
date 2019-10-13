@@ -23,7 +23,12 @@ export default {
   },
   computed: {
     getCellColor() {
-      return this.data.color || '#ffffff';
+      if (this.isCellHidden) {
+        return '#F0F0F0';
+      }
+      else {
+        return this.data.color || '#ffffff';
+      }
     }
   }
 }
@@ -38,6 +43,7 @@ export default {
   cursor: pointer;
 
   &--hidden {
+    background-color: #F0F0F0;
     border: none;
     cursor: initial;
   }

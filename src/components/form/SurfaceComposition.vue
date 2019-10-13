@@ -43,7 +43,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { WIZARD, CELL } from './../../utils/constants/index';
+import { WIZARD, CELL } from '@/utils/constants/index';
 import { BaseButton } from '@/components/bootstrap';
 import PatternSelection from '@/components/form/PatternSelection';
 import ColorSelection from '@/components/form/ColorSelection';
